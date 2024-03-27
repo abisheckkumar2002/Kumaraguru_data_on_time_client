@@ -1,0 +1,318 @@
+.MuiGrid-grid-md-3{
+    margin-top: 35px!important;
+}
+
+.MuiGrid-grid-md-4{
+    margin-top: 40px!important;
+}
+
+
+.css-7txj2x {
+    width:70px !important;
+    opacity:1;
+    background:transparent;
+    color:#344767;
+    border-radius:none;
+    box-shadow:none;
+    height: 40px !important;
+   }
+
+
+   .css-w614i4 {
+   
+    font-size: 16px !important;
+    color: black !important;
+  }
+
+  .css-1ltnlsw{
+    font-size: 16px !important;
+    color: black !important;
+  }
+
+  .css-ekdnj9{
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: black !important;
+  }
+  .confirm-box__content {
+    background-color: lightblue;
+  }
+
+  .MuiInputBase-input{
+    /* padding-top: 30px!important; */
+  }
+
+  /* piechart */
+  .App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .LegendList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    list-style: none; /* Remove default bullets */
+  }
+  
+  .LegendList li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .BulletLabel {
+    display: flex;
+    align-items: center;
+  }
+  
+  .CirecleBullet {
+    border-radius: 50%;
+  }
+  
+  .BulletLabelText {
+    margin-left: 10px;
+  }
+  
+  .CenteredLabelValue {
+    font-size: 36px;
+    font-weight: 600;
+    fill: #0088fe;
+  }
+
+  .recharts-legend-wrapper{
+    position: relative!important;
+    /* width: unset !important;
+    margin: auto !important;
+    left: 30px !important; */
+  }
+  .noofstudents .recharts-legend-wrapper{
+    position: relative!important;
+    width: unset !important;
+    margin: auto !important;
+    left: 30px !important;
+  }
+  .amountreceive .recharts-legend-wrapper{
+    position: relative!important;
+    width: 400px !important;
+    margin: auto !important;
+    left: 20px !important;
+    bottom: 50px !important;
+  }
+  .courseorder .recharts-legend-wrapper{
+    position: relative!important;
+    width: 400px !important;
+    margin: auto !important;
+    left: 20px !important;
+    bottom: 50px !important;
+  }
+  .noofstudents .recharts-label {
+    font-size: 15px !important;
+    font-weight: 700;
+}
+.amountreceive .recharts-label {
+  font-size: 12px !important;
+  font-weight: 700;
+}
+.paddingzz .css-1xr7jc4-MuiInputBase-input-MuiOutlinedInput-input{
+  padding: 15px !important;
+}
+  /* button:not(:disabled) {
+    cursor: pointer;
+    width: 70px;
+  }
+
+  .confirm-box__actions > :not(:last-child){
+    width:70px;
+  }
+     */
+.MuiFormLabel-root{
+  color: red;
+  font-size: 13px;
+}
+     
+
+  
+.css-1h15ts-MuiPaper-root-MuiCard-root {
+
+  margin: 40px 0;
+  padding: 0 8px;
+}
+
+
+.makeStyles-labelRoot-44 {
+  color: black !important;
+  font-size: 16px !important;
+
+}
+
+.makeStyles-grid-22 {
+  margin-top: 15px !important;
+}
+
+.css-honmcm-MuiGrid-root>.MuiGrid-item {
+  padding-top: 20px !important;
+}
+
+.css-1pvfc2b-MuiTabs-root {
+   margin-bottom: 15px !important;
+}
+
+
+.makeStyles-primaryCardHeader-35:not(.makeStyles-cardHeaderIcon-30) {
+  background: linear-gradient(195deg, #49a3f1, #1A73E8) !important;
+  box-shadow: 0rem 0.25rem 1.25rem 0rem rgb(0 0 0 / 14%),
+    0rem 0.4375rem 0.625rem -0.3125rem rgb(0 187 212 / 40%) !important;
+}
+
+.makeStyles-primary-7 {
+  box-shadow: 0 2px 2px 0 rgb(63 81 181), 0 3px 1px -2px rgb(63 81 181), 0 1px 5px 0 rgb(63 81 181) !important;
+  background-color: #3f51b5 !important;
+}
+
+.makeStyles-underline-41:after {
+  border-color: #60a4f9 !important;
+}
+
+
+.makeStyles-primaryCardHeader-18:not(.makeStyles-cardHeaderIcon-13) {
+background: linear-gradient(195deg, #49a3f1, #1A73E8) !important;
+  box-shadow: 0rem 0.25rem 1.25rem 0rem rgb(0 0 0 / 14%),
+    0rem 0.4375rem 0.625rem -0.3125rem rgb(0 187 212 / 40%) !important;
+}
+.makeStyles-primary-41 {
+  box-shadow: 0 2px 2px 0 rgb(63 81 181), 0 3px 1px -2px rgb(63 81 181), 0 1px 5px 0 rgb(63 81 181) !important;
+    background-color: #3f51b5 !important;
+}
+
+
+
+
+
+.makeStyles-formControl-49 {
+  margin: 18px 0 0 0 !important;
+}
+.css-1pvfc2b-MuiTabs-root {
+  margin: 20px 0px;
+}
+
+.css-12dqeey-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  background-color: #227bea;
+  color: #fff !important;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 10px;
+}
+/* .MuiFormLabel-root{
+  color: black !important;
+}
+ .makeStyles-labelRoot-44{
+  color: black !important;
+ } */
+
+ .react-datepicker-wrapper {
+    margin-top: 14px;
+ }
+
+.MuiTypography-noWrap {
+  color: black !important;
+  font-weight: 500 !important;
+}
+ .confirm-box {
+  position: fixed !important;
+  z-index: 2 !important;
+  left: 45% !important;
+  top: 50% !important;
+  width: 100% !important;
+  height: 100% !important;
+  /* opacity: 0.55; */
+  /* overflow: hidden;
+  z-index: 2; */
+ }
+ .confirm-box__content {
+   background-color: #fff !important;
+   width: 100% !important;
+ }
+
+ .confirm-box__content button {
+  background: #3949a3;
+    border-color: #3949a3;
+    color: #fff !important;
+    padding: 2px 10px;
+    border-radius: 4px;
+}
+/* label{
+  color: black !important;
+} */
+.css-qjcmos-MuiChip-root {
+ 
+  background-color: #fff !important;
+ 
+}
+
+/* .css-hm2aps-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
+  left: 313px !important;
+} */
+.css-1qoy8mm-MuiButtonBase-root-MuiMenuItem-root.Mui-selected{
+  width: 100%;
+}
+
+.makeStyles-primaryCardHeader-36:not(.makeStyles-cardHeaderIcon-31){
+  background: linear-gradient(195deg, #49a3f1, #1A73E8) !important;
+    box-shadow: 0rem 0.25rem 1.25rem 0rem rgb(0 0 0 / 14%),
+      0rem 0.4375rem 0.625rem -0.3125rem rgb(0 187 212 / 40%) !important;
+}
+.makeStyles-primary-8{
+    box-shadow: 0 2px 2px 0 rgb(63 81 181), 0 3px 1px -2px rgb(63 81 181), 0 1px 5px 0 rgb(63 81 181) !important;
+      background-color: #3f51b5 !important;
+}
+
+.makeStyles-root-1 {
+  height: unset !important;
+}
+.makeStyles-root-1 .MuiPaper-root {
+  background-color: #ffff !important;
+  z-index: 77777 !important;
+}
+
+.react-datepicker__input-container{
+  /* padding: 10px; */
+  font-size: 15px;
+}
+.react-datepicker__input-container input{
+  padding: 10px;
+}
+.ffgh{
+  background: #3f51b5 !important;
+    color: white !important;
+    /* padding: 15px 20px; */
+    padding: 4px 10px !important;
+    border-radius: 4px !important;
+}
+.recharts-label{
+  font-size: 9px;
+  font-weight: 700;
+}
+.flogin{
+  justify-content: end;
+    display: flex;
+    margin-top: -35px;
+}
+
+.css-1qoy8mm-MuiButtonBase-root-MuiMenuItem-root{
+  width: 100% !important;
+}
+.css-56s1s1-MuiInputBase-root-MuiOutlinedInput-root{
+  width: 100% !important;
+}
+
+.css-1nos2st {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+.css-1f19gdh {
+  padding-top: 8px !important;
+}
+.css-1igy7s2 {
+  padding: 14px !important;
+}
