@@ -18,11 +18,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import config from "lib/config";
-
+import MDBox from "components/MDBox";
+import DataTable from "examples/Tables/DataTable";
 //import avatar from "assets/img/faces/marc.jpg";
 import isEmpty from "../../lib/isEmpty";
 
-import { getevent } from "../../actions/users";
+import { getEvent1 } from "../../actions/users";
 
 const styles = {
   cardCategoryWhite: {
@@ -58,47 +59,96 @@ let toasterOption = {
   progress: undefined,
 };
 
-const initialFormValue = {
-  image: "",
-  location: "",
-  date: "",
-  company: "",
-};
+
+
+const columns = [
+  {
+    Header: "key",
+    accessor: "key",
+    align: "left",
+    Cell: ({ value }) => value ? value : "-"
+  },
+  {
+    Header: "isRequired",
+    accessor: "isRequired",
+    align: "left",
+    Cell: ({ value }) => value ? "True" : "False"
+  },
+  {
+    Header: "inputField",
+    accessor: "inputField",
+    align: "left",
+    Cell: ({ value }) => value ? value : "-"
+  },
+  {
+    Header: "inputDataType",
+    accessor: "inputDataType",
+    align: "left",
+    Cell: ({ value }) => value ? value : "-"
+  },
+  {
+    Header: "option",
+    accessor: "option",
+    align: "left",
+    Cell: ({ value }) => Array.isArray(value) ? value.join(", ") : "-"
+  
+  }
+];
+
+
+
+
 const useStyles = makeStyles(styles);
 
 export default function UserProfile(props) {
   const classes = useStyles();
   const history = useNavigate();
-  const [userdet, setUser] = useState();
-  const [formValue, setFormValue] = useState(initialFormValue);
+  const [eventKey, seteventKey] = useState([]);
+  const [formValue, setFormValue] = useState({
+    eventId:"",
+    eventType_id:"",
+    tittle:"",
+    description:""
+
+
+
+  });
+
+  console.log(eventKey,"eventKeyeventKeyeventKeyeventKeyeventKey")
   const [validateError, setValidateError] = useState({});
 
-  const { image, location, date, company } = formValue;
+  const { eventId, eventType_id, tittle, description } = formValue;
+
+  const extractTag = <div dangerouslySetInnerHTML={{ __html: description }}></div>;
+
+  console.log(formValue,"formValueformValueformValue")
 
   const { id } = useParams();
   // console.log(id,"asdfdsfdsfdsf");
 
-  const handleFile = (event) => {
-    const { id, files } = event.target;
-    //settmpupimagefront(URL.createObjectURL(event.target.files[0]));
 
-    let formData = { ...formValue, ...{ [id]: files[0] } };
-    setFormValue(formData);
-    //setValidateError(formData)
-  };
 
   const getUserData = async () => {
-    var test = await getevent(id);
-    let formdata = {};
+    let event =await getEvent1(id)
 
-    formdata["image"] = test.userValue.image;
-    formdata["location"] = test.userValue.location;
-    formdata["date"] = test.userValue.date;
-    formdata["company"] = test.userValue.company;
-    formdata["keys"] = test.userValue.keys;
 
-    setFormValue(formdata);
-    //setUser(test.userValue);
+    const eventData = event.userValue.data
+  
+    const data={}
+    data["eventId"]=eventData.eventId
+    data["eventType_id"]=eventData.eventType_id.eventtype
+    data["tittle"]=eventData.tittle
+    data["description"]=eventData.description
+    
+    const mappedData = eventData.eventKey.map((element) => ({
+      ...element
+    }))
+   
+
+    seteventKey(mappedData)
+
+    console.log(mappedData,"mappedDatamappedDatamappedDatamappedDatamappedData")
+   setFormValue(data) 
   };
 
   useEffect(() => {
@@ -130,18 +180,15 @@ export default function UserProfile(props) {
               </CardHeader>
               <CardBody>
                 <GridContainer>
+                  
+                 
                   <GridItem xs={12} sm={12} md={3}>
-                    <Typography noWrap className={classes.image}>
-                      Image
+                    <Typography noWrap className={classes.location}>
+                      EventId
                     </Typography>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={3}>
-                    <img
-                      src={config.API + "/images/user/" + image}
-                      alt="..."
-                      style={{ maxWidth: 200, maxHeight: 200 }}
-                    />
-                    {/* <Box sx={{ typography: "image" }}>{image}</Box> */}
+                    <Box sx={{ typography: "location" }}>{eventId}</Box>
                   </GridItem>
 
                   <GridItem xs={12} sm={12} md={3}>
@@ -150,42 +197,42 @@ export default function UserProfile(props) {
                     </Typography>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={3}>
-                    <Box sx={{ typography: "location" }}>Faculty Event</Box>
+                  <Box sx={{ typography: "location" }}>{tittle}</Box>
                   </GridItem>
+
+
                   <GridItem xs={12} sm={12} md={3}>
-                    <Typography noWrap className={classes.date}>
-                      type
+                    <Typography noWrap className={classes.location}>
+                      Event Type
                     </Typography>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={3}>
-                    <Box sx={{ typography: "date" }}>student</Box>
+                  <Box sx={{ typography: "location" }}>{eventType_id}</Box>
                   </GridItem>
+
                   <GridItem xs={12} sm={12} md={3}>
-                    <Typography noWrap className={classes.company}>
-                      Short Description
+                    <Typography noWrap className={classes.location}>
+                      Description
                     </Typography>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={3}>
-                    <Box sx={{ typography: "company" }}>
-                      This event handle for the student cordination for enhanace
-                      the student features
-                    </Box>
+                  <Box sx={{ typography: "location" }}>{ extractTag}</Box>
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={3}>
-                    <Typography noWrap className={classes.company}>
-                     Keys
-                    </Typography>
-                  </GridItem>
-                  {StaticData.map(
-                    (
-                      element,
-                      index // Adding index for the key prop
-                    ) => (
-                      <GridItem key={index} xs={12} sm={12} md={3}>
-                        <Box sx={{ typography: "keys" }}>{element}</Box>
-                      </GridItem>
-                    )
-                  )}
+
+
+
+
+                  <MDBox  xs={12} sm={12} md={3}  style={{ marginTop:"70px" }}>
+                <DataTable
+                  table={{ columns: columns, rows: eventKey  }} // Pass departments directly
+                  isSorted={false}
+                  entriesPerPage={false}
+                  showTotalEntries={false}
+                  
+                 
+                />
+              </MDBox>
+                  
                 </GridContainer>
               </CardBody>
             </Card>

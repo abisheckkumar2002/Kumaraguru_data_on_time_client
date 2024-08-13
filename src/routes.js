@@ -1,5 +1,5 @@
 import Dashboard from "layouts/dashboard";
-// import Profile from "layouts/profile";
+import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 
@@ -49,8 +49,21 @@ import Contactformview from "layouts/contactform/view";
 
 import Eventindex from "layouts/events/index";
 import Eventadd from "layouts/events/add";
-import Eventedit from "layouts/events/edit";
+import Eventedit from "layouts/events/edit";      //n for admin only
 import Eventview from "layouts/events/view";
+
+import EventUserIndex from"layouts/eventuser/index"
+import EventUserAdd from 'layouts/eventuser/add'               //this are show for admin only to view overall data
+import EventUserView from"layouts/eventuser/view.js"
+
+
+
+import MyEventDataIndex from "layouts/myevent/index.js"
+import MyEventDataAdd from "layouts/myevent/add.js"                            // this are show for all user to entry crud
+import MyEventListIndex from "layouts/myevent/eventlist.js"
+import MyEventDataView from "layouts/myevent/view.js"
+import MyEventDataEdit from "layouts/myevent/edit.js"
+
 
 import Educontentindex from "layouts/educontent/index";
 import Educontentadd from "layouts/educontent/add";
@@ -290,23 +303,28 @@ import Registerindex from "layouts/registeredstudents/index";
 import Registerview from "layouts/registeredstudents/view";
 import Icon from "@mui/material/Icon";
 
-
 //department  crud
 import Departmentindex from "layouts/department/index";
-import Departmentadd from "layouts/department/add"
-import Departmentedit from "layouts/department/edit"
+import Departmentadd from "layouts/department/add";
+import Departmentedit from "layouts/department/edit";
 
 //staff crud
-import Staffindex from "layouts/staff/index"
-import Staffadd from "layouts/staff/add"
-import Staffview from "layouts/staff/view"
-import Staffedit from "layouts/staff/edit"
+import Staffindex from "layouts/staff/index";
+import Staffadd from "layouts/staff/add";
+import Staffview from "layouts/staff/view";
+import Staffedit from "layouts/staff/edit";
 // @mui icons
+
+// criteria Type
+
+import CriteriaTypeIndex  from"layouts/eventcriteriatype/index"
+import CriteriaTypeAdd from"layouts/eventcriteriatype/add"
+import CriteriaTypeEdit from"layouts/eventcriteriatype/edit"
 
 // student crud
 
-import StudentIndex from "layouts/student/index"
-import StudentAdd from "layouts/student/add"
+import StudentIndex from "layouts/student/index";
+import StudentAdd from "layouts/student/add";
 import StudentEdit from "layouts/student/edit";
 import StudentView from "layouts/student/view";
 
@@ -317,18 +335,16 @@ import PersonalAssitantView from "layouts/personalassitant/view";
 import PersonalAssitantEdit from "layouts/personalassitant/edit";
 
 // hod crud
-import HodIndex  from "layouts/hod/index";
-import HodAdd from "layouts/hod/add"
-import HodEdit from "layouts/hod/edit"
-import HodView from "layouts/hod/view"
-
+import HodIndex from "layouts/hod/index";
+import HodAdd from "layouts/hod/add";
+import HodEdit from "layouts/hod/edit";
+import HodView from "layouts/hod/view";
 
 // events
 
-
 //faculty Event
 
-import FacultyEventIndex from  "layouts/facultyevent/index"
+import FacultyEventIndex from "layouts/facultyevent/index";
 
 // student Event
 
@@ -336,13 +352,355 @@ import StudentEventIndex from "layouts/studentevent/index";
 
 // student $faculty Event
 
-import StudentFacultyEvent from "layouts/student&facultyEvent/index"
+import StudentFacultyEvent from "layouts/student&facultyEvent/index";
 
 // faculty event index
-import EventIndex from "layouts/faculty/eventindex/index"
+import EventIndex from "layouts/faculty/eventindex/index";
 // faculty Event 1.1
-import  Faculty1 from "layouts/faculty/1.1/add"
-const routes = [
+import Faculty1 from "layouts/faculty/1.1/add";
+
+export const route1 = [
+  {
+    type: "collapse",
+    name: "Dashboard",
+    key: "dashboard",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "/dashboard",
+    component: <Dashboard />,
+  },
+  {
+    type: "divider",
+    
+    
+  },
+
+  {
+    type: "title",
+    title: "Master files",
+  },
+
+  //department master
+  {
+    
+    type: "collapse",
+    name: "DEPARTMENT",
+    key: "department",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/department",
+    component: <Departmentindex />,
+  },
+
+  {
+    
+    type: "collapse",
+    name: "PROFILE",
+    key: "profile",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/profile",
+    component: <Profile />,
+  },
+  {
+    type: "",
+    name: "Department",
+    key: "departmentadd",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/department/add",
+    component: <Departmentadd />,
+  },
+
+  {
+    type: "",
+    name: "Department",
+    key: "departmentedit",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/department/edit/:id",
+    component: <Departmentedit />,
+  },
+
+
+
+
+  
+
+//    {
+//   type: "collapse",
+//   name: "CRITERIA TYPE",
+//   key: "criteriaTypeindex",
+//   icon: <Icon fontSize="small">assignment</Icon>,
+//   route: "/criteriatype",
+//   component: <CriteriaTypeIndex />,
+// },
+// {
+//   type: "",
+//   name: "criteriaType",
+//   key: "criteriaTypeadd",
+//   icon: <Icon fontSize="small">assignment</Icon>,
+//   route: "/criteriatype/add",
+//   component: <CriteriaTypeAdd />,
+// },
+// {
+//   type: "",
+//   name: "criteriaType",
+//   key: "criteriaTypeedit",
+//   icon: <Icon fontSize="small">assignment</Icon>,
+//   route: "/criteriatype/edit/:id",
+//   component: <CriteriaTypeEdit />,
+// },
+
+{
+  type: "collapse",
+  name: "EVENT",
+  key: "event",
+  icon: <Icon fontSize="small">paid</Icon>,
+  route: "/event",
+  component: <Eventindex />,
+},
+
+
+
+
+
+  {
+    type: "divider",
+    
+  },
+
+
+  {
+    type: "title",
+    title: "USERS",
+  },
+
+  // USER
+
+
+  // STAFF
+
+  {
+    type: "collapse",
+    name: "STAFF",
+    key: "staff",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/staff",
+    component: <Staffindex />,
+  },
+
+  {
+    type: "",
+    name: "STAFF",
+    key: "staffadd",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/staff/add",
+    component: <Staffadd />,
+  },
+
+  {
+    type: "",
+    name: "STAFF",
+    key: "staffedit",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/staff/edit/:id",
+    component: <Staffedit />,
+  },
+
+  {
+    type: "",
+    name: "STAFF",
+    key: "staffview",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/staff/view/:id",
+    component: <Staffview />,
+  },
+
+  // STUDENT
+
+
+
+  {
+    type: "collapse",
+    name: "STUDENT",
+    key: "studentindex",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/studentindex",
+    component: <StudentIndex />,
+  },
+
+  {
+    type: "",
+    name: "STUDENT",
+    key: "studentindex",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/studentadd",
+    component: <StudentAdd />,
+  },
+
+  {
+    type: "",
+    name: "STUDENT",
+    key: "studentview",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/studentview/:id",
+    component: <StudentView />,
+  },
+
+  {
+    type: "",
+    name: "STUDENT",
+    key: "studentedit",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/studentedit/:id",
+    component: <StudentEdit />,
+  },
+
+  {
+    type: "divider",
+  },
+  {
+    type: "title",
+    title: "MY EVENT",
+  },
+  
+  {
+    
+    type: "collapse",
+    name: "MY ENTRY",
+    key: "eventlist",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/eventlist",
+    component: <MyEventListIndex />,
+  },
+
+  {
+    type: "",
+    name: "myeventdata",
+    key: "myeventdata",
+    icon: <Icon fontSize="small">paid</Icon>,
+    route: "/:id/myeventdata",
+    component: <MyEventDataIndex />,
+  },
+
+  {
+    type: "",
+    name: "myeventdata",
+    key: "myeventdata",
+    icon: <Icon fontSize="small">paid</Icon>,
+    route: "/:id/add",
+    component: <MyEventDataAdd />,
+  },
+
+  {
+    type: "",
+    name: "myeventdata",
+    key: "myeventdata",
+    icon: <Icon fontSize="small">paid</Icon>,
+    route: "/:id1/:id2/view",
+    component: <MyEventDataView />,
+  },
+
+  {
+    type: "",
+    name: "myeventdata",
+    key: "myeventdata",
+    icon: <Icon fontSize="small">paid</Icon>,
+    route: "/:id1/:id2/edit",
+    component: <MyEventDataEdit/>,
+  },
+
+  {
+    type: "divider",
+  },
+  {
+    type: "title",
+    title: "EVENTS",
+  },
+  {
+    type: "collapse",
+    name: "FACULTY",
+    key: "facultyeventindex",
+    icon: <Icon fontSize="small">paid</Icon>,
+    route: "/facultyeventindex",
+    component: <FacultyEventIndex />,
+  },
+
+  {
+    type: "collapse",
+    name: "STUDENT ",
+    key: "studenteventindex",
+    icon: <Icon fontSize="small">paid</Icon>,
+    route: "/studenteventindex",
+    component: <StudentEventIndex />,
+  },
+
+  {
+    type: "collapse",
+    name: "DEPARTMENT ACTIVITY",
+    key: "studentfacultyindex",
+    icon: <Icon fontSize="small">paid</Icon>,
+    route: "/studentfacultyindex",
+    component: <StudentFacultyEvent />,
+  },
+
+  {
+    type: "",
+    name: "Events Type",
+    key: "eventadd",
+    route: "/eventadd",
+    component: <Eventadd />,
+  },
+
+  {
+    type: "",
+    name: "Eventview",
+    key: "eventview",
+    route: "/event/view/:id",
+    component: <Eventview />,
+
+    
+  },
+
+
+  
+  {
+    type: "",
+    name: "Eventedit",
+    key: "eventedit",
+    route: "/event/edit/:id",
+    component: <Eventedit />,
+  },
+
+
+
+
+  {
+    type: "",
+    name: "eventUser",
+    key: "eventUserindex",
+    icon: <Icon fontSize="small">paid</Icon>,
+    route: "/:id/eventuser",
+    component: <EventUserIndex />,
+  },
+
+  {
+    type: "",
+    name: "eventUser",
+    key: "eventUseradd",
+    icon: <Icon fontSize="small">paid</Icon>,
+    route: "/:id/event/add",
+    component: <EventUserAdd />,
+  },
+  
+  {
+    type: "",
+    name: "eventUser",
+    key: "eventUserview",
+    icon: <Icon fontSize="small">paid</Icon>,
+    route: "/:id1/:id2/viewall",
+    component: <EventUserView />,
+  },
+
+];
+
+export const routes = [
   {
     type: "collapse",
     name: "Dashboard",
@@ -392,7 +750,7 @@ const routes = [
     key: "departmentedit",
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/departmentedit/:id",
-    component: < Departmentedit/>,
+    component: <Departmentedit />,
   },
 
   {
@@ -410,7 +768,7 @@ const routes = [
     key: "staffadd",
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/staffadd",
-    component: <Staffadd/>,
+    component: <Staffadd />,
   },
 
   {
@@ -419,7 +777,7 @@ const routes = [
     key: "staffedit",
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/staffedit/:id",
-    component: <Staffedit/>,
+    component: <Staffedit />,
   },
 
   {
@@ -428,9 +786,8 @@ const routes = [
     key: "staffview",
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/staffview/:id",
-    component: <Staffview/>,
+    component: <Staffview />,
   },
-
 
   {
     type: "collapse",
@@ -440,7 +797,6 @@ const routes = [
     route: "/studentindex",
     component: <StudentIndex />,
   },
-  
 
   {
     type: "",
@@ -466,7 +822,7 @@ const routes = [
     key: "studentedit",
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/studentedit/:id",
-    component: <StudentEdit/>,
+    component: <StudentEdit />,
   },
 
   {
@@ -478,6 +834,13 @@ const routes = [
     component: <Eventindex />,
   },
 
+  {
+    type: "divider",
+  },
+  {
+    type: "title",
+    title: "MY DATA",
+  },
 
   {
     type: "divider",
@@ -486,7 +849,6 @@ const routes = [
     type: "title",
     title: "PERSONAL ASSITANT",
   },
-
 
   {
     type: "collapse",
@@ -503,7 +865,7 @@ const routes = [
     key: "departmentpaadd",
     icon: <Icon fontSize="small">paid</Icon>,
     route: "/personalassitantadd",
-    component: <PersonalAssitantAdd/>,
+    component: <PersonalAssitantAdd />,
   },
 
   {
@@ -524,7 +886,6 @@ const routes = [
     component: <PersonalAssitantView />,
   },
 
- 
   {
     type: "divider",
   },
@@ -559,9 +920,6 @@ const routes = [
     component: <StudentFacultyEvent />,
   },
 
-
-
-  
   {
     type: "divider",
   },
@@ -570,7 +928,6 @@ const routes = [
     type: "title",
     title: "DEPARTMENT HOD",
   },
-
 
   {
     type: "collapse",
@@ -590,7 +947,6 @@ const routes = [
     component: <HodAdd />,
   },
 
-
   {
     type: "",
     name: "HOD",
@@ -599,7 +955,6 @@ const routes = [
     route: "/hodedit/:id",
     component: <HodEdit />,
   },
-
 
   {
     type: "",
@@ -610,17 +965,14 @@ const routes = [
     component: <HodView />,
   },
 
-
   {
     type: "",
     name: "",
     key: "faculyeventindex",
     icon: <Icon fontSize="small">paid</Icon>,
     route: "/faculyeventindex/:id",
-    component: <EventIndex />,     
+    component: <EventIndex />,
   },
-
-
 
   {
     type: "",
@@ -630,7 +982,6 @@ const routes = [
     route: "/faculyeventindex/:id/addprogramorgainsedforfaculty",
     component: <Faculty1 />,
   },
-
 
   // {
   //   type: "",
@@ -647,8 +998,6 @@ const routes = [
   //   route: "/scheduleeditmaterial/:id",
   //   component: <Coursescheduleeditmaterial />,
   // },
-
-
 
   // {
   //   type: "collapse",
@@ -768,7 +1117,6 @@ const routes = [
   //   route: "/scholarshipindex",
   //   component: <Scholarshipindex />,
   // },
-
 
   // {
   //   type: "collapse",
@@ -948,8 +1296,6 @@ const routes = [
   //   route: "/blogindex",
   //   component: <Blogindex />,
   // },
-
-
 
   // {
   //   type: "collapse",
@@ -2093,8 +2439,6 @@ const routes = [
     component: <Eventadd />,
   },
 
- 
-
   {
     type: "",
     name: "Addeducontent",
@@ -2452,4 +2796,4 @@ const routes = [
   },
 ];
 
-export default routes;
+

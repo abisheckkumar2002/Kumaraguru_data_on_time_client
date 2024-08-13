@@ -1,0 +1,247 @@
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import React, { useEffect, useState, Fragment } from "react";
+
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+import MDTypography from "components/MDTypography";
+
+// Material Dashboard 2 React example components
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Footer from "examples/Footer";
+import DataTable from "examples/Tables/DataTable";
+import { Button } from "@material-ui/core";
+import { toast } from "react-toastify";
+import { confirm } from "react-confirm-box";
+import "react-toastify/dist/ReactToastify.css";
+import Select from "react-select";
+import { useNavigate } from "react-router-dom";
+import config from "lib/config";
+import { eventList, deleteEvent } from "actions/users";
+// Data
+import authorsTableData from "layouts/tables/data/authorsTableData";
+// import projectsTableData from "layouts/test/data/itemdetails";
+
+const event = () => {
+  const navigate = useNavigate();
+  const [userdet, setUserDet] = useState([]);
+  const [tabs, setTabs] = useState([]);
+  const { columns: pColumns, rows: pRows } = authorsTableData();
+  const type = localStorage.kct_user_type;
+  const [activeTab, setActiveTab] = useState(0); // Default to the first tab
+
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+  };
+
+  // Define the content for each tab
+
+  const columns = [
+    {
+      Header: "EventId",
+      accessor: "eventId",
+      align: "left",
+    },
+
+    {
+      Header: "Tittle",
+      accessor: "tittle",
+      align: "left",
+    },
+    {
+      Header: "Action",
+      accessor: "action",
+      align: "center",
+    },
+  ];
+
+  const add = () => {
+    window.location = "/principal/eventadd";
+  };
+
+  const delevent = async (id) => {
+    const result = await confirm("Are you sure to delete?");
+
+    if (result) {
+      console.log("ididid", id);
+      if (id !== "") {
+      
+        const response = await deleteEvent(id); // Renamed from `deleteEvent` to `deleteEventApiCall`
+        console.log("response", response);
+
+        toast.success("Deleted Successfully");
+        getEventListData();
+      }
+      return;
+    }
+    console.log("You clicked No!");
+  };
+
+
+
+
+  function viewAll(id) {
+    if (id != "") {
+      navigate(`/${id}/myeventdata`);
+    }
+  }
+
+
+  useEffect(() => {
+    var userType = localStorage.kct_user_type;
+    console.log(userType,"userTypeuserTypeuserTypeuserType")
+
+    if (userType !== "Faculty") {
+        setTabs([
+          { id: 1, name: "STUDENT" },
+          { id: 2, name: "FACULTY" },
+          { id: 3, name: "DEPARTMENT" },
+        ]);
+      }
+    if (userType === "Faculty") {
+      setTabs([{ id: 2, name: "Faculty " }]);
+    }
+    getEventListData();
+  }, []);
+
+  const getEventListData = async () => {
+    const eventListData = await eventList(null);
+  
+
+    console.log(eventListData,"suriyasuriyasuriya")
+    const mapped = await Promise.all(
+      eventListData.userValue.event_list.map((element) => {
+        Object.assign(element, {
+          action: (
+            <>
+              <MDTypography
+                component="a"
+                onClick={() => viewAll(element._id)}
+                variant="caption"
+                color="text"
+                fontWeight="medium"
+              >
+                <Button className="ml-3" variant="contained" color="primary">
+                View All
+                </Button>
+              </MDTypography>
+            </>
+          ),
+        });
+
+        return element;
+      })
+    );
+
+    setUserDet(mapped);
+  };
+
+  return (
+    <DashboardLayout>
+      {/* <DashboardNavbar /> */}
+
+     
+
+      <MDBox pt={6} pb={3}>
+        <div style={{ paddingBottom: 20 }} className="row">
+          <div className="col-9">
+            <div className="tabs">
+              {tabs.map((tab, index) => (
+                <div
+                  key={index}
+                  className={activeTab == index ? "tab_active" : "tab"}
+                  onClick={() => handleTabClick(index)}
+                >
+                  {tab.name}
+                </div>
+              ))}
+            </div>
+
+            <style>
+              {`
+         .tabs {
+          display: flex;
+          margin-left: 20px;
+      }
+          
+          .tab {
+            font-size: 17px;
+            padding: 5px 10px;
+            cursor: pointer;
+          }
+          
+          .tab_active {
+            border-bottom: 3px solid #007bff;
+            color: #007bff;
+            font-size: 17px;
+            padding: 5px 10px;
+            font-weight: bold;
+        }
+          
+          .tab-content {
+            margin-top: 20px;
+          }
+        `}
+            </style>
+          </div>
+
+          {/* <div className="col-3">
+              <Select
+                options={departmentList.map((option) => ({
+                  value: option._id,
+                  label: option.department,
+                }))}
+                placeholder="Select Department"
+                loading={false} // Set to false for static data
+                closeMenuOnScroll={true}
+                value={
+                  dep_id
+                    ? {
+                        value: dep_id,
+                        label: departmentList.find(
+                          (option) => option._id === dep_id
+                        ).department,
+                      }
+                    : null
+                }
+                onChange={handleDepartmentChange}
+              />
+            </div> */}
+        </div>
+        <Grid container spacing={6}>
+          <Grid item xs={12}>
+            <Card>
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
+                <MDTypography variant="h6" color="white">
+                  Events
+                </MDTypography>
+              </MDBox>
+              <MDBox pt={3}>
+                <DataTable
+                  table={{ columns: columns, rows: userdet }}
+                  isSorted={false}
+                  entriesPerPage={false}
+                  showTotalEntries={false}
+                  noEndBorder
+                  canSearch={true}
+                />
+              </MDBox>
+            </Card>
+          </Grid>
+        </Grid>
+      </MDBox>
+      {/* <Footer /> */}
+    </DashboardLayout>
+  );
+};
+export default event;

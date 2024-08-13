@@ -14,60 +14,104 @@ import DataTable from "examples/Tables/DataTable";
 import { Button } from "@material-ui/core";
 import { confirm } from "react-confirm-box";
 import { toast } from "react-toastify";
-
+import { useNavigate } from "react-router-dom";
 // Data
 import authorsTableData from "layouts/tables/data/authorsTableData";
+import { getDepartmentList ,deleteDepartment} from "actions/users";
 
 const Department = () => {
+  const navigate = useNavigate();
+
   const [departments, setDepartments] = useState([]);
 
-
-  console.log(departments,"dddddfdfdfdfdf");
-  console.log(setDepartments,"setDepartmentssetDepartmentssetDepartments");
+  console.log(departments, "dddddfdfdfdfdf");
+  console.log(setDepartments, "setDepartmentssetDepartmentssetDepartments");
   const columns = [
     {
-      Header: 'Department',
-      accessor: 'department', // Changed 'content' to 'department'
-      align: 'left',
+      Header: "Department",
+      accessor: "department", // Changed 'content' to 'department'
+      align: "left",
     },
     {
-      Header: 'Action',
-      accessor: 'action',
-      align: 'left',
+      Header: "SORTfORM",
+      accessor: "sortForm", // Changed 'content' to 'department'
+      align: "left",
+    },
+    {
+      Header: "Action",
+      accessor: "action",
+      align: "center",
     },
   ];
 
   const addDepartment = () => {
-    window.location = '/admin/departmentadd';
+  
+    navigate( `/department/add`)
   };
 
   const editDepartment = (id) => {
     if (id) {
-      window.location = `/admin/departmentedit/${id}`;
+      navigate( `/department/edit/${id}`)
+   
     }
   };
 
-  const getDepartmentListData = () => {
-    const staticData = [
-      { _id: 1, department: 'Master of Computer Application' },
-      { _id: 2, department: 'Master of Business Application' },
-      { _id: 3, department: 'Electronic Computer Science' },
-    ];
 
-    const mappedData = staticData.map((element) => ({
+
+
+
+
+  
+  const delDepartment = async(id) =>{
+    const result = await confirm("Are you sure to delete?");
+    if (result) {
+      console.log("ididid",id)
+      if (id != "") {
+       const abi= await deleteDepartment(id);
+       console.log("abiabiabiabiabiabi",abi)
+      
+        toast.success("Deleted Successfully");
+        getDepartmentListData();
+      
+      }
+      return;
+    }
+    console.log("You click No!");
+  }
+
+  const getDepartmentListData = async () => {
+   
+
+    const departmentList = await getDepartmentList(null);
+
+    const mappedData = departmentList.userValue.map((element) => ({
       ...element,
       action: (
-        <MDTypography
-          component="a"
-          onClick={() => editDepartment(element._id)}
-          variant="caption"
-          color="text"
-          fontWeight="medium"
-        >
-          <Button className="ml" variant="contained" color="primary">
-            Edit
-          </Button>
-        </MDTypography>
+        <>
+          <MDTypography
+            component="a"
+            onClick={() => editDepartment(element._id)}
+            variant="caption"
+            color="text"
+            fontWeight="medium"
+          >
+            <Button className="ml" variant="contained" color="primary">
+              Edit
+            </Button>
+          </MDTypography>
+
+          <MDTypography
+            component="a"
+            onClick={() => delDepartment(element._id)}
+            variant="caption"
+            color="text"
+            fontWeight="medium"
+          >
+            <Button className="ml-3" variant="contained" color="primary">
+              Delete
+            </Button>
+          </MDTypography>
+        </>
       ),
     }));
 

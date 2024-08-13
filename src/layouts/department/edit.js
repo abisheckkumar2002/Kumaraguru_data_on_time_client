@@ -16,8 +16,9 @@ import CardFooter from "components/Card/CardFooter.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { getDepartment, updateDepartment } from "actions/users";
 import "react-toastify/dist/ReactToastify.css";
-
+import isEmpty from "lib/isEmpty";
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -40,53 +41,59 @@ const styles = {
   },
 };
 
-const initialFormValue = {
-  department: "",
-};
-
 const useStyles = makeStyles(styles);
 
 const department = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const classes = useStyles();
   const history = useNavigate();
 
-  const [formValue, setFormValue] = useState(initialFormValue);
+  const [formValue, setFormValue] = useState({
+    department: "",
+    sortForm: "",
+  });
   const [validateError, setValidateError] = useState({});
   console.log("validateError", validateError);
 
-  const { department } = formValue;
+  const { department, sortForm } = formValue;
 
   //function
 
-  const onChange = (e) => {
-    e.preventDefault();
+  
+  // api call
+  const getUserDepartment = async () => {
+    let { error, userValue } = await getDepartment(id);
+    //get api fecth
 
-    console.log(e.target, "e.target");
+    console.log(error, "errorerrorerrorerror");
+    console.log(userValue, "resultresultresultresultresult");
+    let data = {};
 
-    const { id, value } = e.target;
-    let formData = { ...formValue, ...{ [id]: value } };
-    setFormValue(formData);
-    console.log(formValue, "formValueformValue");
+    data["department"] = userValue.data.department;
+    data["sortForm"] = userValue.data.sortForm;
+
+    setFormValue(data);
   };
 
-  const getUserData =async ()=>{
-
-
-    //get api fecth
-    let formdata ={}
-
-    formdata['department'] ="master of computerscience"
-
-    setFormValue(formdata);
-  }
-
+ 
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const { error } = await updateDepartment(formValue, id);
+    if (isEmpty(error)) {
+      toast.success("Updated Successfully");
+      navigate( `/department`)
+    } else {
+      setValidateError(error);
+    }
+  };
 
   //usestate
 
-  useEffect(() => {  
-    
-    setTimeout(getUserData, 100);
-    getUserData();
+  useEffect(() => {
+    setTimeout(getUserDepartment, 100);
+
+    getUserDepartment();
   }, []);
 
   return (
@@ -101,7 +108,7 @@ const department = () => {
               <form
                 className={classes.form}
                 noValidate
-                // onSubmit={handleFormSubmit}
+                onSubmit={handleFormSubmit}
               >
                 <CardHeader color="primary">
                   <h4 className={classes.cardTitleWhite}>Edit</h4>
@@ -113,18 +120,46 @@ const department = () => {
                       <CustomInput
                         labelText="Department"
                         style={{ color: "black" }}
-                        onChange={onChange}
+                        onChange={(e) =>
+                          setFormValue({
+                            ...formValue,
+                            department: e.target.value,
+                          })
+                        }
                         value={department}
                         id="department"
                         formControlProps={{
                           fullWidth: true,
                         }}
                       />
-                      {/* {validateError.content && (
+                      {validateError.department && (
                         <span className={classes.textDanger}>
-                          {validateError.content}
+                          {validateError.department}
                         </span>
-                      )} */}
+                      )}
+                    </GridItem>
+
+                    <GridItem xs={12} sm={12} md={4}>
+                      <CustomInput
+                        labelText="SORT FORM"
+                        style={{ color: "black" }}
+                        onChange={(e) =>
+                          setFormValue({
+                            ...formValue,
+                            sortForm: e.target.value,
+                          })
+                        }
+                        value={sortForm}
+                        id="sortForm"
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                      />
+                      {validateError.sortForm && (
+                        <span className={classes.textDanger}>
+                          {validateError.sortForm}
+                        </span>
+                      )}
                     </GridItem>
                   </GridContainer>
                 </CardBody>

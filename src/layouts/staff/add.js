@@ -21,13 +21,14 @@ import { useNavigate } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 import Select from "react-select";
 import { toast } from "react-toastify";
-
+import Typography from "@material-ui/core/Typography";
 //import avatar from "assets/img/faces/marc.jpg";
 import isEmpty from "lib/isEmpty";
 // import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 // Data
 import authorsTableData from "layouts/tables/data/authorsTableData";
 // import projectsTableData from "layouts/test/data/itemdetails";
+import { userTypeList, getDepartmentList, addNewStaff } from "actions/users";
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -52,12 +53,6 @@ const styles = {
 };
 
 const options = [
-  { id: 1, label: "Master of Computer Application" },
-  { id: 2, label: "Electronic Communication Enginneering" },
-  { id: 3, label: "Mechanical Enginneering" },
-];
-
-const options2 = [
   { id: 1, label: "Head Of Department" },
   { id: 2, label: "Staff" },
 ];
@@ -66,14 +61,68 @@ const useStyles = makeStyles(styles);
 
 const staffAdd = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
+  const [userTypeData, setUserTypeData] = useState([]);
+  const [departmentList, setdepartmentList] = useState([]);
 
-  const history = useNavigate();
+  console.log(userTypeData, "userTypeData");
+  console.log(departmentList, "departmentList");
+
+  const [formValue, setFormValue] = useState({
+    name: "",
+    mobile: "",
+    type_id: "",
+    email: "",
+    UserId: "",
+    dep_id: "",
+  });
 
   const [validateError, setValidateError] = useState({});
+
+  console.log(validateError, "validateErrorvalidateErrorvalidateError");
+
+  const { name, mobile, type_id, email, UserId, dep_id } = formValue;
+
+  console.log(type_id, "type_idtype_idtype_id");
+  console.log(dep_id, "dep_iddep_iddep_iddep_iddep_iddep_id");
+
+  const userSelectData = async () => {
+    let userData = await userTypeList();
+
+    const typeLabel = userData.userValue.map((option) => ({
+      value: option._id,
+      label: option.Type,
+    }));
+
+    setUserTypeData(typeLabel);
+
+    let departmentListdata = await getDepartmentList();
+
+    setdepartmentList(departmentListdata.userValue);
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    let { error } = await addNewStaff(formValue);
+
+    console.log(error, "errorerrorerrorerrorerrorerror");
+    if (isEmpty(error)) {
+      toast.success("Added Successfully");
+      navigate(`/staff`);
+    } else {
+      setValidateError(error);
+    }
+  };
+
+  useEffect(() => {
+    userSelectData();
+  }, []);
+
   return (
     <div>
       <DashboardLayout>
-        <Button color="primary" onClick={() => history(-1)}>
+        <Button color="primary" onClick={() => navigate(-1)}>
           Back to
         </Button>
         <GridContainer>
@@ -82,7 +131,7 @@ const staffAdd = () => {
               <form
                 className={classes.form}
                 noValidate
-                // onSubmit={}
+                onSubmit={handleFormSubmit}
               >
                 <CardHeader color="primary">
                   <MDTypography>
@@ -93,144 +142,149 @@ const staffAdd = () => {
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={4}>
                       <CustomInput
+                        labelText="NAME"
+                        onChange={(e) =>
+                          setFormValue({ ...formValue, name: e.target.value })
+                        }
+                        value={name}
+                        id="name"
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                      />
+                      {validateError.name && (
+                        <span className={classes.textDanger}>
+                          {validateError.name}
+                        </span>
+                      )}
+                    </GridItem>
+
+                    <GridItem xs={12} sm={12} md={4}>
+                      <CustomInput
                         labelText="STAFF ID"
-                        // onChange={onChange}
-                        // value={department}
-                        id="department"
+                        onChange={(e) =>
+                          setFormValue({ ...formValue, UserId: e.target.value })
+                        }
+                        value={UserId}
+                        id="UserId"
                         formControlProps={{
                           fullWidth: true,
                         }}
                       />
-                      {validateError.department && (
+                      {validateError.UserId && (
                         <span className={classes.textDanger}>
-                          {validateError.department}
+                          {validateError.UserId}
                         </span>
                       )}
                     </GridItem>
 
                     <GridItem xs={12} sm={12} md={4}>
                       <CustomInput
-                        labelText="STAFF NAME"
-                        // onChange={onChange}
-                        // value={department}
-                        id="department"
+                        labelText="MAIL ID"
+                        onChange={(e) =>
+                          setFormValue({ ...formValue, email: e.target.value })
+                        }
+                        value={email}
+                        id="email"
                         formControlProps={{
                           fullWidth: true,
                         }}
                       />
-                      {validateError.department && (
+                      {validateError.email && (
                         <span className={classes.textDanger}>
-                          {validateError.department}
+                          {validateError.email}
                         </span>
                       )}
                     </GridItem>
 
-                    {/* <GridItem xs={12} sm={12} md={4}>
-                      <CustomInput
-                        labelText="DEPARTMENT"
-                        // onChange={onChange}
-                        // value={department}
-                        id="department"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                      />
-                      {validateError.department && (
-                        <span className={classes.textDanger}>
-                          {validateError.department}
-                        </span>
-                      )}
-                    </GridItem> */}
-
-                    <GridItem xs={12} sm={12} md={4}>
-                      <CustomInput
-                        labelText="COLLEGE MAILID"
-                        // onChange={onChange}
-                        // value={department}
-                        id="department"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                      />
-                      {validateError.department && (
-                        <span className={classes.textDanger}>
-                          {validateError.department}
-                        </span>
-                      )}
-                    </GridItem>
-
-                    
                     <GridItem xs={12} sm={12} md={4}>
                       <CustomInput
                         labelText="PHONE NO"
-                        // onChange={onChange}
-                        // value={department}
-                        id="department"
+                        onChange={(e) =>
+                          setFormValue({ ...formValue, mobile: e.target.value })
+                        }
+                        value={mobile}
+                        id="mobile"
                         formControlProps={{
                           fullWidth: true,
                         }}
                       />
-                      {validateError.department && (
+                      {validateError.mobile && (
                         <span className={classes.textDanger}>
-                          {validateError.department}
+                          {validateError.mobile}
                         </span>
                       )}
                     </GridItem>
 
                     <div
                       style={{
-                        width: 370,
-                        marginLeft: "17px",
+                        width: 360,
+                        marginLeft: "15px",
                         marginTop: "43px",
                         marginRight: "10px",
                       }}
                     >
                       <Select
-                        options={options}
+                        options={departmentList.map((option) => ({
+                          value: option._id,
+                          label: option.department,
+                        }))}
                         placeholder="Select Department"
                         loading={true}
-                        closeOnScroll={true} // Fixed incorrect syntax
-                        labelField="id"
-                        separator={true}
-                        // valueField="id"
-                        // value={options}
-                        style={{
-                          placeholder: (basestyles, state) => ({
-                            ...basestyles,
-                            color: "red",
-                            fontSize: 40,
-                          }),
-                        }}
-                        // onChange={(values) => this.setValues(values)}
+                        closeMenuOnScroll={true}
+                        value={
+                          dep_id
+                            ? {
+                                value: dep_id,
+                                label: departmentList.find(
+                                  (option) => option._id === dep_id
+                                ).department,
+                              }
+                            : null
+                        }
+                        onChange={(selectedOption) =>
+                          setFormValue({
+                            ...formValue,
+                            dep_id: selectedOption.value,
+                          })
+                        }
                       />
+
+                      {validateError.dep_id && (
+                        <span className={classes.textDanger}>
+                          {validateError.dep_id}
+                        </span>
+                      )}
                     </div>
 
                     <div
                       style={{
-                        width: 370,
-                        marginLeft: "17px",
+                        width: 360,
+                        marginLeft: "30px",
                         marginTop: "43px",
                         marginRight: "10px",
                       }}
                     >
                       <Select
-                        options={options2}
+                        options={userTypeData}
                         placeholder="Select Type"
                         loading={true}
-                        closeOnScroll={true} // Fixed incorrect syntax
-                        labelField="id"
-                        separator={true}
-                        // valueField="id"
-                        // value={options}
-                        style={{
-                          placeholder: (basestyles, state) => ({
-                            ...basestyles,
-                            color: "red",
-                            fontSize: 40,
-                          }),
-                        }}
-                        // onChange={(values) => this.setValues(values)}
+                        closeMenuOnScroll={true}
+                        value={userTypeData.find(
+                          (option) => option.value === type_id
+                        )}
+                        onChange={(selectedOption) =>
+                          setFormValue({
+                            ...formValue,
+                            type_id: selectedOption.value,
+                          })
+                        }
                       />
+                      {validateError.type_id && (
+                        <span className={classes.textDanger}>
+                          {validateError.type_id}
+                        </span>
+                      )}
                     </div>
                   </GridContainer>
                 </CardBody>

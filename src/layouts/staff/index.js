@@ -19,20 +19,26 @@ import { getexamlist, deleteexam } from "../../actions/users";
 
 // Data
 import authorsTableData from "layouts/tables/data/authorsTableData";
+import { useNavigate } from "react-router-dom";
+import { useNavigation } from "actions/Navigate";
+
+import { getStaffList,deleteexistingStaff } from "actions/users";
 // import projectsTableData from "layouts/test/data/itemdetails";
 
 const Staff = () => {
   const [formdata, setformdata] = useState([]);
-console.log("formdatadatadata",formdata)
+  const [tabs, setTabs] = useState([]);
+  const [activeTab, setActiveTab] = useState(0); 
+  const navigate = useNavigate();
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+  };
+
+  console.log("formdatadatadata", formdata);
   const columns = [
     {
-      Header: "Staff Id",
-      accessor: "staff_id", // Changed 'content' to 'department'
-      align: "left",
-    },
-    {
-      Header: "Department",
-      accessor: "department_id", // Changed 'content' to 'department'
+      Header: "User Id",
+      accessor: "UserId", // Changed 'content' to 'department'
       align: "left",
     },
     {
@@ -41,58 +47,65 @@ console.log("formdatadatadata",formdata)
       align: "left",
     },
     {
+      Header: "Department",
+      accessor: "department", // Changed 'content' to 'department'
+      align: "left",
+    },
+   
+    {
       Header: "Action",
       accessor: "action",
       align: "center",
     },
-   
   ];
 
   const addStaff = () => {
-    window.location = "/admin/staffadd";
+   
+    navigate("/staff/add");
   };
 
   const editStaff = (id) => {
     if (id) {
-      window.location = `/admin/staffedit/${id}`;
+    
+      navigate( `/staff/edit/${id}`);
     }
   };
 
-  const viewStaff =(id)=>{
-    if(id){
-        window.location =`/admin/staffview/${id}`
+  const viewStaff = (id) => {
+    if (id) {
+    
+      
+      navigate( `/staff/view/${id}`)
+     
     }
+  };
+
+
+
+
+  const deleteStaff = async(id) =>{
+    const result = await confirm("Are you sure to delete?");
+    if (result) {
+      console.log("ididid",id)
+      if (id != "") {
+       const abi= await deleteexistingStaff(id);
+      
+      
+        toast.success("Deleted Successfully");
+        getDUserListtData();
+      
+      }
+      return;
+    }
+    console.log("You click No!");
   }
 
-  const getDepartmentListData = () => {
-    const staticData = [
-      {
-        _id: 1,
-        department_id: "Master of computer application",
-        staff_id: "23",
-        name: "crk",
-        phone: 7603984379,
-        clgMailid: "crk@mca001",
-      },
-      {
-        _id: 2,
-        department_id: "Electronic Communication Engineering",
-        staff_id: "24",
-        name: "dhanabalan",
-        phone: 7603984379,
-        clgMailid: "dhanabalan@mca.gmail.com",
-      },
-      {
-        _id: 3,
-        department_id: "Master of Business Application",
-        staff_id: "25",
-        name: "hamind",
-        phone: 7603984379,
-        clgMailid: "hamind@gmail.com",
-      },
-    ];
+  const getDUserListtData = async () => {
+    const userList = await getStaffList();
 
-    const mappedData = staticData.map((element) => ({
+    console.log(userList, "bbbbbbfgfbfbfbf");
+    
+    const mappedData = userList.userValue.map((element) => ({
       ...element,
       action: (
         <>
@@ -108,74 +121,178 @@ console.log("formdatadatadata",formdata)
             </Button>
           </MDTypography>
 
+          <MDTypography
+            component="a"
+            onClick={() => viewStaff(element._id)}
+            variant="caption"
+            color="text"
+            fontWeight="medium"
+          >
+            <Button className="ml-3" variant="contained" color="primary">
+              View
+            </Button>
+          </MDTypography>
 
-          <MDTypography component="a"   
-          onClick={() => viewStaff(element._id)} 
-          variant="caption" 
-          color="text" 
-          fontWeight="medium">
-              <Button  className="ml-3"
-            variant="contained"
-            color="primary">View</Button>
-               </MDTypography>
 
+          <MDTypography
+            component="a"
+            onClick={() => deleteStaff(element._id)}
+            variant="caption"
+            color="text"
+            fontWeight="medium"
+          >
+            <Button className="ml-3" variant="contained" color="primary">
+              Delete
+            </Button>
+          </MDTypography>
         </>
       ),
-    
     }));
 
     setformdata(mappedData);
   };
 
   useEffect(() => {
-    getDepartmentListData();
+    var userType = localStorage.kct_user_type;
+    var tabs = [];
+    
+    switch (userType) {
+      case "Principal":
+        tabs = [
+          { id: 1, name: "ADMIN" },
+          { id: 2, name: "HOD" },
+          { id: 3, name: "DEPARTMENT PA" },
+          { id: 4, name: "MONTLY EXECUTOR" },
+          { id: 5, name: "STAFF" }
+        ];
+        break;
+    
+      case "Admin":
+        tabs = [
+          { id: 1, name: "HOD" },
+          { id: 2, name: "DEPARTMENT PA" },
+          { id: 3, name: "MONTLY EXECUTOR" },
+          { id: 4, name: "STAFF" }
+        ];
+        break;
+    
+      case "Head Of Department":
+        tabs = [
+          { id: 1, name: "DEPARTMENT PA" },
+          { id: 2, name: "MONTLY EXECUTOR" },
+          { id: 3, name: "STAFF" }
+        ];
+        break;
+    
+      case "Montly Executor":
+        tabs = [
+          { id: 1, name: "DEPARTMENT PA" },
+          { id: 2, name: "STAFF" }
+        ];
+        break;
+    
+      default:
+        tabs = [];
+    }
+    
+    setTabs(tabs);
+    
+
+    getDUserListtData();
   }, []);
+
+
+
+
+
+  
 
   return (
     <DashboardLayout>
-      <Button
-        className="ml-3"
-        variant="contained"
-        color="primary"
-        onClick={addStaff}
-      >
-        Add
-      </Button>
-
-      <MDBox pt={6} pb={3}>
-        <Grid container spacing={6}>
-          <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  STAFF
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns: columns, rows: formdata }} // Pass departments directly
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                  canSearch={true}
-                />
-              </MDBox>
-            </Card>
-          </Grid>
+    <Button
+      className="ml-3"
+      variant="contained"
+      color="primary"
+      onClick={addStaff}
+    >
+      Add
+    </Button>
+  
+    <MDBox pt={6} pb={3}>
+      <div style={{ paddingBottom: 20 }} className="row">
+      <div className="tabs">
+              {tabs.map((tab, index) => (
+                <div
+                  key={index}
+                  className={activeTab == index ? "tab_active" : "tab"}
+                  onClick={() => handleTabClick(index)}
+                >
+                  {tab.name}
+                </div>
+              ))}
+            </div>
+      </div>
+  
+      <style>
+        {`
+          .tabs {
+            display: flex;
+            margin-left: 20px;
+          }
+          
+          .tab {
+            font-size: 17px;
+            padding: 5px 10px;
+            cursor: pointer;
+          }
+          
+          .tab_active {
+            border-bottom: 3px solid #007bff;
+            color: #007bff;
+            font-size: 17px;
+            padding: 5px 10px;
+            font-weight: bold;
+          }
+          
+          .tab-content {
+            margin-top: 20px;
+          }
+        `}
+      </style>
+  
+      <Grid container spacing={6}>
+        <Grid item xs={12}>
+          <Card>
+            <MDBox
+              mx={2}
+              mt={-3}
+              py={3}
+              px={2}
+              variant="gradient"
+              bgColor="info"
+              borderRadius="lg"
+              coloredShadow="info"
+            >
+              <MDTypography variant="h6" color="white">
+                STAFF
+              </MDTypography>
+            </MDBox>
+            <MDBox pt={3}>
+              <DataTable
+                table={{ columns: columns, rows: formdata }} // Pass departments directly
+                isSorted={false}
+                entriesPerPage={false}
+                showTotalEntries={false}
+                noEndBorder
+                canSearch={true}
+              />
+            </MDBox>
+          </Card>
         </Grid>
-      </MDBox>
-    </DashboardLayout>
-  );
+      </Grid>
+    </MDBox>
+  </DashboardLayout>
+  )  
 };
 
 export default Staff;

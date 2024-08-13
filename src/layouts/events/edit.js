@@ -1,31 +1,46 @@
 import React, { useState, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import InputLabel from "@material-ui/core/InputLabel";
+// import InputLabel from "@material-ui/core/InputLabel";
 // core components
+import InputLabel from "@material-ui/core/InputLabel";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import MDTypography from "components/MDTypography";
+//import Button from '@mui/material/Button';
+// import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Footer from "examples/Footer";
+// import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+
+// import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
-
+import Dropdown from "react-dropdown";
 //import avatar from "assets/img/faces/marc.jpg";
-import isEmpty from "../../lib/isEmpty";
-
-import { getevent, updateevent } from "../../actions/users";
+import isEmpty from "lib/isEmpty";
+import Select from "react-select";
+import "react-dropdown/style.css";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  eventTypeList,
+  AddNewEvent,
+  getEvent1,
+  updateEvent1,
+} from "actions/users";
+import { blackColor } from "assets/jss/material-dashboard-react";
+import "./event.css";
 
 const styles = {
   addButton: {
     display: "flex",
+    width: 100000,
   },
 
   cardCategoryWhite: {
@@ -35,17 +50,32 @@ const styles = {
     marginTop: "0",
     marginBottom: "0",
   },
+  textDanger: {
+    color: "rgb(148,44,174)",
+  },
   cardTitleWhite: {
     color: "#FFFFFF",
     marginTop: "0px",
     minHeight: "auto",
-    fontWeight: "300",
+    fontWeight: "500",
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
     marginBottom: "3px",
     textDecoration: "none",
+    fontSize: "18px",
   },
-  textDanger: {
-    color: "rgb(148,44,174)",
+
+  textareacontainer: {
+    margin: "bottom: 20px",
+  },
+
+  textareainput: {
+    width: "100%",
+    height: "50px",
+    padding: "10px",
+    fontsize: "16px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    resize: "vertical",
   },
 };
 
@@ -61,57 +91,63 @@ let toasterOption = {
   progress: undefined,
 };
 
-const initialFormValue = {
-  location: "",
-  date: "",
-  company: "",
-  image: "",
-  content: "",
-  keys: [{ attribute: " ", type: " " }],
-};
+const options = ["one", "two", "three"];
 
-const modules = {
-  toolbar: [
-    [{ header: [1, 2, false] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    ["link", "image"],
-  ],
-};
-
-const formats = [
-  "header",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-];
+const defaultOption = options[0];
 
 const useStyles = makeStyles(styles);
 
-const hodEdit = () => {
+export default function UserProfile() {
   const classes = useStyles();
   const history = useNavigate();
-  // const dispatch = useDispatch();
+  const { id } = useParams();
+  const [eventTypeLabel, setEventTypeLabel] = useState([]);
+  const [eventType, setEventType] = useState([]);
 
-  const [formValue, setFormValue] = useState(initialFormValue);
+  const [formValue, setFormValue] = useState({
+    eventId: "",
+    tittle: "",
+    description: "",
+    eventType_id: "",
+  });
+
+  console.log(formValue, "formValueformValueformValueformValueformValue");
+
+  const [labelList, setLabelList] = useState([
+    // {
+    //   key: " ",
+    //   isRequired: false,
+    //   inputField: " ",
+    //   inputDataType: "",
+    //   option: "",
+    // },
+  ]);
+  console.log(
+    labelList,
+    "labelListlabelListlabelListlabelListlabelListlabelListlabelList"
+  );
+
   const [validateError, setValidateError] = useState({});
+  console.log(
+    validateError,
+    "validateErrorvalidateErrorvalidateErrorvalidateErrorvalidateError"
+  );
+
+  const { eventId, eventType_id, tittle, description } = formValue;
+
+  console.log(formValue, "formvalueeeeeeeeeeeeeeeee");
+
+  const newKeys = [...labelList];
+  console.log(newKeys, "newKeys");
 
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
       [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image"],
+      // ["link", "image"], // description box
     ],
   };
-
   const formats = [
     "header",
     "bold",
@@ -119,142 +155,161 @@ const hodEdit = () => {
     "underline",
     "strike",
     "blockquote",
-    "list",
+    "list", // description box
     "bullet",
     "indent",
     "link",
-    "image",
+    // "image",
   ];
 
-  const handleProcedureContentChange = (
-    contentsatta,
-    delta,
-    source,
-    editor
-  ) => {
-    //let has_attribues = delta.ops[1].attributes || "";
-    console.log(contentsatta);
-    let formData = { ...formValue, ...{ ["content"]: contentsatta } };
-    setFormValue(formData);
+  const inputFields = [
+    { value: 1, label: "TextBox" },
+    { value: 2, label: "DatePicker" },
+    { value: 3, label: "DropDown" },
+    { value: 4, label: "TextEditor" },
+  ];
+
+  const inputDataType = [
+    { value: 1, label: "Number" },
+    { value: 2, label: "AlpahaNumeric" }, //backend need same
+  ];
+
+  // const handleProcedureContentChange = (
+  //   contentsatta,
+  //   delta,
+  //   source,
+  //   editor
+  // ) => {
+  //   //let has_attribues = delta.ops[1].attributes || "";
+  //   console.log(contentsatta);
+  //   let formData = { ...formValue, ...{ ["content"]: contentsatta } };
+  //   setFormValue(formData);
+  //   //const cursorPosition = e.quill.getSelection().index;
+  //   // this.quill.insertText(cursorPosition, "★");
+  //   //this.quill.setSelection(cursorPosition + 1);
+  // };
+
+  // const handleFile = (event) => {
+  //   event.preventDefault();
+  //   console.log(event.target.files[0]);
+  //   const { id, files } = event.target;
+  //   //settmpupimagefront(URL.createObjectURL(event.target.files[0]));
+
+  //   let formData = { ...formValue, ...{ [id]: files[0] } };
+  //   setFormValue(formData);
+  //   //setValidateError(formData)
+  // };
+
+  // const addInput = () => {
+  //   // Clone the current keys array
+  //   const newKeys = [...formValue.keys];
+  //   console.log(newKeys, "ggggggg");
+  //   // Add a new empty string to the  array
+  //   newKeys.push({
+  //     label: "",
+  //     inputField: "",
+  //     option: "",
+  //     inputDataType: "",
+  //     isMultiple: false,
+  //     isRequired: false,
+  //   });
+  //   // Update the state with the new keys array
+  //   setFormValue({ ...formValue, keys: newKeys });
+  //   console.log(newKeys, "newKeysnewKeysnewKeysnewKeysnewKeys");
+  // };
+
+  const addInput = () => {
+    const newKeys = [...labelList]; //clone
+    console.log(newKeys, "bcbcbcbcbcbc");
+
+    // Add a new empty string to the  array
+    newKeys.push({
+      key: " ",
+      isRequired: false,
+      inputField: " ",
+      inputDataType: "",
+      option: "",
+    });
+    // Update the state with the new keys array
+    setLabelList(newKeys);
   };
-
-  const { id } = useParams();
-  // console.log(userId,"asdfdsfdsfdsf");
-
-  const handleFile = (event) => {
-    const { id, files } = event.target;
-    //settmpupimagefront(URL.createObjectURL(event.target.files[0]));
-
-    let formData = { ...formValue, ...{ [id]: files[0] } };
-    setFormValue(formData);
-    //setValidateError(formData)
-  };
-
-  // function
-  const onChange = (e) => {
-    e.preventDefault();
-    // console.log(e.target);
-    const { id, value } = e.target;
-    let formData = { ...formValue, ...{ [id]: value } };
-    setFormValue(formData);
-    // console.log(formValue);
-    //setValidateError(formData)
-  };
-
-  const { location, date, image, company, content, keys } = formValue;
-
-  console.log(keys.length, "anuanuanauanauanauanauanauanauanauanauanauanauan");
-  console.log(keys, "keyvaluekeyvaluekeyvalue");
 
   const removeInputField = (indexToRemove) => {
     // Filter out the value at the specified index from the keys array
-    const newKeys = formValue.keys.filter(
-      (_, index) => index !== indexToRemove
-    );
+    console.log(indexToRemove, "indexToRemove");
+    const newKeys = labelList.filter((_, index) => index !== indexToRemove);
 
     console.log(
       newKeys,
       "removeInputFieldremoveInputFieldremoveInputFieldremoveInputField"
     );
     // Update the state with the new keys array
-    setFormValue({ ...formValue, keys: newKeys });
+    setLabelList(newKeys); //{ ...formValue, keys: newKeys }  its create the new object
   };
 
-  const addInput = () => {
-    // Clone the current keys array
-    const newKeys = [...formValue.keys];
-    console.log(
-      ...formValue.keys,
-      ".formValue.keys.formValue.keys.formValue.keys.formValue.keys.formValue.keys"
-    );
-    console.log(newKeys, "newKeysnewKeysnewKeysnewKeysnewKeys");
-    // Add a new empty string to the cloned array
-    newKeys.push({ attribute: "", type: "" });
-    // Update the state with the new keys array
-    setFormValue({ ...formValue, keys: newKeys });
+  function stripHtmlTags(html) {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  }
+
+  const userSelectData = async () => {
+    let event = await getEvent1(id);
+
+    let userData = await eventTypeList();
+
+    const eventlabel = userData.userValue.map((option) => ({
+      value: option._id,
+      label: option.eventtype,
+    }));
+
+    setEventTypeLabel(eventlabel);
+
+    setEventType(userData.userValue);
+    const eventData = event.userValue.data;
+
+    console.log(eventData, "eventDataeventDataeventData");
+    const data = {};
+    data["eventId"] = eventData.eventId;
+    data["eventType_id"] = eventData.eventType_id._id;
+    data["tittle"] = eventData.tittle;
+    data["description"] = eventData.description;
+
+    console.log(data, "vwishsisisisis");
+    setFormValue(data);
   };
 
-  const onChangekey = (index, value) => {
-    console.log(value, "onChangekeyonChangekeyonChangekey");
-    const newKeys = [...formValue.keys]; // Create a copy of the keys array
-    newKeys[index] = { ...newKeys[index], attribute: value }; // Update the attribute value for the specific index
-    setFormValue({ ...formValue, keys: newKeys }); // Update the state with the modified keys array
-  };
-
-  const onChangeType = (index, value) => {
-    console.log(value, "onChangeTypeonChangeTypeonChangeTypeonChangeType");
-    const newKeys = [...formValue.keys]; // Create a copy of the keys array
-    newKeys[index] = { ...newKeys[index], type: value }; // Update the type value for the specific index
-    setFormValue({ ...formValue, keys: newKeys }); // Update the state with the modified keys array
-  };
+  useEffect(() => {
+    userSelectData();
+  }, []);
 
   const handleFormSubmit = async (e) => {
-    //console.log("saran");
     e.preventDefault();
-    console.log(formValue);
-    const keys = test.userValue.keys.push(formValue.keys);
-    console.log(formValue);
-    let reqData = {
-      location,
-      image,
-      date,
-      company,
-      content,
-      keys,
+
+    const dataToSend = {
+      tittle: formValue.tittle,
+      description: formValue.description,
+      eventType_id: formValue.eventType_id,
+      eventId: formValue.eventId,
     };
-    console.log(reqData);
-    let { error } = await updateevent(reqData, id);
+
+    if (labelList.length > 0) {
+      dataToSend.eventKey = labelList;
+    }
+
+    console.log(
+      dataToSend,
+      "dataToSenddataToSenddataToSenddataToSenddataToSenddataToSend"
+    );
+    let { error, result } = await updateEvent1(dataToSend, id);
     console.log("error", error);
+    console.log("result", result);
     if (isEmpty(error)) {
-      toast.success("Updated Successfully", toasterOption);
-      history.push("/eventindex");
+      toast.success("Updated Successfully");
+      history("/event");
     } else {
       setValidateError(error);
     }
   };
-
-  const getUserData = async () => {
-    // var test = await getevent(id);
-    // Assuming you'll get the 'test' variable from somewhere
-    // console.log(test);
-
-    let formdata = {};
-    formdata["location"] = "madurai";
-    formdata["date"] = "date";
-    formdata["Photofile"] = "Photofile";
-    formdata["company"] = "company";
-    formdata["content"] = "content";
-
-    (formdata["keys"] = [{ attribute: " ", type: " " }]),
-      // Assuming 'setFormValue' is a function to set form data
-      setFormValue(formdata);
-  };
-
-  useEffect(() => {
-    //logout(history)
-    setTimeout(getUserData, 100);
-    getUserData();
-  }, []);
 
   return (
     <div>
@@ -262,6 +317,7 @@ const hodEdit = () => {
         <Button color="primary" onClick={() => history(-1)}>
           Back to
         </Button>
+
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
@@ -271,148 +327,441 @@ const hodEdit = () => {
                 onSubmit={handleFormSubmit}
               >
                 <CardHeader color="primary">
-                  <h4 className={classes.cardTitleWhite}>Edit</h4>
-                  <p className={classes.cardCategoryWhite}>update Event</p>
+                  <MDTypography>
+                    <h3 className={classes.cardTitleWhite}>Add Event</h3>
+                  </MDTypography>
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={4}>
+                    <GridItem xs={12} sm={12} md={6}>
                       <CustomInput
-                        labelText="Event image"
-                        onChange={handleFile}
-                        id="image"
-                        type="file"
+                        labelText="Event Id"
+                        onChange={(e) =>
+                          setFormValue({
+                            ...formValue,
+                            eventId: e.target.value,
+                          })
+                        }
+                        id="eventId"
+                        value={eventId}
                         formControlProps={{
                           fullWidth: true,
                         }}
                       />
-                      {validateError.image && (
+                      {validateError.eventId && (
                         <span className={classes.textDanger}>
-                          {validateError.image}
+                          {validateError.eventId}
                         </span>
                       )}
                     </GridItem>
 
-                    <GridItem xs={12} sm={12} md={4}>
-                      <CustomInput
-                        labelText="Type"
-                        onChange={onChange}
-                        value={date}
-                        id="date"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                      />
-                      {validateError.description && (
-                        <span className={classes.textDanger}>
-                          {validateError.description}
-                        </span>
-                      )}
-                    </GridItem>
-
-                    <GridItem xs={12} sm={12} md={4}>
+                    <GridItem xs={12} sm={12} md={6}>
                       <CustomInput
                         labelText="Tittle"
-                        onChange={onChange}
-                        value={company}
-                        id="company"
+                        onChange={(e) =>
+                          setFormValue({ ...formValue, tittle: e.target.value })
+                        }
+                        value={tittle}
+                        id="tittle"
                         formControlProps={{
                           fullWidth: true,
                         }}
                       />
+                      {validateError.tittle && (
+                        <span className={classes.textDanger}>
+                          {validateError.tittle}
+                        </span>
+                      )}
+                    </GridItem>
+
+                    <div
+                      style={{
+                        width: 470,
+                        marginLeft: "17px",
+                        marginTop: "48px",
+                        marginRight: "10px",
+                      }}
+                    >
+                      <Select
+                        options={eventTypeLabel}
+                        placeholder="Select Event Type"
+                        loading={true}
+                        closeOnScroll={true} // Fixed incorrect syntax
+                        separator={true}
+                        valueField="id"
+                        value={
+                          eventType_id
+                            ? {
+                                value: eventType_id,
+
+                                label: eventTypeLabel.find((option) => {
+                                  option.value === eventType_id;
+                                }),
+                              }
+                            : null
+                        }
+                        onChange={(selectedOption) =>
+                          setFormValue({
+                            ...formValue,
+                            eventType_id: selectedOption.value,
+                          })
+                        }
+                        style={{
+                          placeholder: (basestyles, state) => ({
+                            ...basestyles,
+                            color: "red",
+                            fontSize: 40,
+                          }),
+                        }}
+                      />
+
+                      {validateError.eventType_id && (
+                        <span className={classes.textDanger}>
+                          {validateError.eventType_id}
+                        </span>
+                      )}
+                    </div>
+
+                    <GridItem xs={12} sm={12} md={6}>
+                      {/* <InputLabel
+                        style={{
+                          marginTop: "25px",
+                          color: "black",
+                          fontSize: "15px",
+                        }}
+                      >
+                        About Event
+                      </InputLabel> */}
+                      <ReactQuill
+                        theme="snow"
+                        modules={modules}
+                        formats={formats}
+                        value={description}
+                        id="description"
+                        onChange={(content) =>
+                          setFormValue({ ...formValue, description: content })
+                        }
+                        style={{ width: "657px", marginTop: "45px" }}
+                      />
+
                       {validateError.description && (
                         <span className={classes.textDanger}>
                           {validateError.description}
                         </span>
                       )}
                     </GridItem>
-
-                    <GridItem xs={12} sm={12} md={12}>
-                      <InputLabel>About Event</InputLabel>
-                      <ReactQuill
-                        theme="snow"
-                        // modules={modules}
-                        // formats={formats}
-                        // value={team || ""}
-                        onChange={handleProcedureContentChange}
-                      ></ReactQuill>
+                    <GridItem item xs={12} sm={12} md={12}>
+                      <InputLabel
+                        style={{
+                          paddingTop: "50px",
+                          color: "blue", // Changed color to white for visibility
+                          fontWeight: "bold", // Changed fontFamily to fontWeight
+                          fontSize: "18px",
+                        }}
+                      >
+                        Note: Once a event key is set, it cannot be edited,
+                        making it crucial to ensure its accuracy when adding an
+                        event
+                      </InputLabel>
                     </GridItem>
+                    {labelList.map((label, index) => (
+                      <div className={classes.addButton} key={index}>
+                        <GridItem xs={12} sm={12} md={4}>
+                          <InputLabel
+                            style={{
+                              marginTop: "30px",
+                              color: "black",
+                              fontSize: "17px",
+                              fontFamily: "bold",
+                              marginLeft: "3px",
+                            }}
+                          >
+                            {"Label" + "  " + (index + 1)}
+                          </InputLabel>
+                          <CustomInput
+                            style={{}}
+                            labelText="Label"
+                            onChange={(e) => {
+                              const newKeys = [...labelList]; // Create a copy of the keys array
+                              newKeys[index] = {
+                                ...newKeys[index],
+                                key: e.target.value,
+                              };
 
-                    {formValue.keys.map((e, index) => (
-                      <div className={classes.addButton}>
-                        <React.Fragment key={index}>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <InputLabel>Add Key</InputLabel>
-                            <CustomInput
-                              labelText={`Attribute ${index + 1}`}
-                              onChange={(e) =>
-                                onChangekey(index, e.target.value)
-                              }
-                              value={e.attribute}
-                              id={`attribute ${index + 1}`}
-                              formControlProps={{
-                                fullWidth: true,
+                              setLabelList(newKeys);
+                            }}
+                            value={label.key}
+                            id={`label ${index + 1}`}
+                            formControlProps={{
+                              fullWidth: true,
+                            }}
+                          />
+                          {validateError[`eventKey[${index + 1}].key`] && (
+                            <span className={classes.textDanger}>
+                              {validateError[`eventKey[${index + 1}].key`]}
+                            </span>
+                          )}
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={2}>
+                          <InputLabel
+                            style={{
+                              marginTop: "70px",
+                              color: "black",
+                              fontSize: "17px",
+                              fontFamily: "bold",
+                              marginLeft: "30px",
+                            }}
+                          >
+                            IsRequired
+                            <div
+                              style={{
+                                marginLeft: "17px",
+                                marginTop: "73px",
+                              }}
+                            >
+                              <input
+                                type="checkbox"
+                                name="isRequired"
+                                value={true}
+                                checked={label.isRequired === true}
+                                onChange={(e) => {
+                                  const newKeys = [...labelList];
+                                  newKeys[index] = {
+                                    ...newKeys[index],
+                                    isRequired: e.target.checked,
+                                  };
+                                  setLabelList(newKeys);
+                                }}
+                              />{" "}
+                            </div>
+                            {validateError[
+                              `eventKey[${index + 1}].isRequired`
+                            ] && (
+                              <span className={classes.textDanger}>
+                                {
+                                  validateError[
+                                    `eventKey[${index + 1}].isRequired`
+                                  ]
+                                }
+                              </span>
+                            )}
+                          </InputLabel>
+                        </GridItem>
+
+                        <GridItem xs={12} sm={12} md={2}>
+                          <InputLabel
+                            style={{
+                              marginTop: "70px",
+                              color: "black",
+                              fontSize: "17px",
+                              marginLeft: "17px",
+                              fontFamily: "bold",
+                            }}
+                          >
+                            Input Field
+                          </InputLabel>
+
+                          <div
+                            style={{
+                              width: "100%",
+                              marginLeft: "17px",
+                              marginTop: "53px",
+                              marginRight: "10px",
+                            }}
+                          >
+                            <Select
+                              options={inputFields}
+                              labelText={`inputField ${index + 1}`}
+                              placeholder="Input Field"
+                              labelField="inputField"
+                              onChange={(selectedOption) => {
+                                const newKeys = [...labelList];
+                                newKeys[index] = {
+                                  ...newKeys[index],
+                                  inputField: selectedOption
+                                    ? selectedOption.label
+                                    : "", // Assign the label string
+                                };
+                                setLabelList(newKeys);
+                              }}
+                              value={inputFields.find(
+                                (option) => option.value === label.label
+                              )}
+                              id={`inputField ${index}`}
+                              style={{
+                                placeholder: (basestyles, state) => ({
+                                  ...basestyles,
+                                  color: "red",
+                                  fontSize: 40,
+                                }),
                               }}
                             />
-                            {validateError.tittle && (
+                          </div>
+
+                          {validateError[
+                            `eventKey[${index + 1}].inputField`
+                          ] && (
+                            <span className={classes.textDanger}>
+                              {
+                                validateError[
+                                  `eventKey[${index + 1}].inputField`
+                                ]
+                              }
+                            </span>
+                          )}
+                        </GridItem>
+
+                        {label.inputField === "TextBox" && label.isRequired ? (
+                          <GridItem xs={12} sm={12} md={2}>
+                            <InputLabel
+                              style={{
+                                marginTop: "70px",
+                                color: "black",
+                                fontSize: "17px",
+                                marginLeft: "17px",
+                                fontFamily: "bold",
+                              }}
+                            >
+                              Input Data Type
+                            </InputLabel>
+
+                            <div
+                              style={{
+                                width: "100%",
+                                marginLeft: "17px",
+                                marginTop: "53px",
+                                marginRight: "10px",
+                              }}
+                            >
+                              <Select
+                                options={inputDataType}
+                                labelText={`inputDataType ${index + 1}`}
+                                placeholder="Select Data Type"
+                                labelField="inputDataType"
+                                onChange={(selectedOption) => {
+                                  const newKeys = [...labelList];
+                                  newKeys[index] = {
+                                    ...newKeys[index],
+                                    inputDataType: selectedOption
+                                      ? selectedOption.label
+                                      : "",
+                                    option: "",
+                                  };
+                                  setLabelList(newKeys);
+                                }}
+                                value={inputDataType.find(
+                                  (option) => option.value === label.label
+                                )}
+                                id={`inputDataType ${index}`}
+                                style={{
+                                  placeholder: (basestyles, state) => ({
+                                    ...basestyles,
+                                    color: "red",
+                                    fontSize: 40,
+                                  }),
+                                }}
+                              />
+                            </div>
+
+                            {validateError[
+                              `eventKey[${index + 1}].inputDataType`
+                            ] && (
                               <span className={classes.textDanger}>
-                                {validateError.tittle}
+                                {
+                                  validateError[
+                                    `eventKey[${index + 1}].inputDataType`
+                                  ]
+                                }
                               </span>
                             )}
                           </GridItem>
+                        ) : null}
 
-                          <GridItem xs={12} sm={12} md={4}>
-                            <InputLabel>Add Input Type</InputLabel>
-                            <CustomInput
-                              labelText={`Type ${index + 1}`}
-                              onChange={(e) =>
-                                onChangeType(index, e.target.value)
-                              }
-                              value={e.type}
-                              id={`type ${index + 1}`}
-                              formControlProps={{
-                                fullWidth: true,
+                        {label.inputField === "DropDown" ? (
+                          <GridItem xs={12} sm={12} md={2}>
+                            <InputLabel
+                              style={{
+                                marginTop: "70px",
+                                color: "black",
+                                fontSize: "17px",
+                                fontFamily: "bold",
+                              }}
+                            >
+                              <div>
+                                Option{" "}
+                                <span style={{ color: "red" }}>
+                                  {" "}
+                                  <br /> note: Option must be a comma-separated
+                                  value
+                                </span>
+                                <br />
+                              </div>
+                            </InputLabel>
+                            <textarea
+                              className={classes.textareainput}
+                              value={label.option}
+                              id={`option ${index + 1}`}
+                              onChange={(e) => {
+                                const newKeys = [...labelList]; // Create a copy of the keys array
+                                newKeys[index] = {
+                                  ...newKeys[index],
+                                  option: e.target.value,
+                                  inputDataType: "",
+                                };
+                                setLabelList(newKeys);
                               }}
                             />
-                            {validateError.tittle && (
+                            {validateError[`eventKey[${index + 1}].option`] && (
                               <span className={classes.textDanger}>
-                                {validateError.tittle}
+                                {validateError[`eventKey[${index + 1}].option`]}
                               </span>
                             )}
                           </GridItem>
+                        ) : null}
 
-                          <GridItem style={{ marginTop: "100px" }}>
-                            {formValue.keys.length > 1 && (
-                              <Button
-                                color="danger"
-                                onClick={() => removeInputField(index)}
-                              >
-                                Remove
-                              </Button>
-                            )}
-                          </GridItem>
-                        </React.Fragment>
+                        <GridItem
+                          xs={12}
+                          sm={12}
+                          md={2}
+                          style={{ marginTop: "11%", marginLeft: "15px" }}
+                        >
+                          <Button
+                            color="danger"
+                            onClick={() => removeInputField(index)}
+                          >
+                            Remove
+                          </Button>
+                        </GridItem>
                       </div>
                     ))}
-                    <GridItem style={{ marginTop: "100px" }}>
+
+                    <GridItem
+                      item
+                      xs={12}
+                      sm={12}
+                      md={12}
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                      }}
+                    >
                       <Button color="primary" onClick={addInput}>
-                        Add
+                        Add Key
                       </Button>
                     </GridItem>
                   </GridContainer>
                 </CardBody>
                 <CardFooter>
                   <Button color="primary" type="submit">
-                    Update
+                    Edit
                   </Button>
                 </CardFooter>
               </form>
             </Card>
           </GridItem>
         </GridContainer>
+        {/* <Footer/> */}
       </DashboardLayout>
     </div>
   );
-};
-
-export default hodEdit;
+}

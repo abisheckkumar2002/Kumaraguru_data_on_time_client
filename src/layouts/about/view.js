@@ -22,7 +22,7 @@ import config from "lib/config";
 //import avatar from "assets/img/faces/marc.jpg";
 import isEmpty from "../../lib/isEmpty";
 
-import { getaboutdata,  } from "../../actions/users";
+import { getaboutdata } from "../../actions/users";
 
 const styles = {
   cardCategoryWhite: {
@@ -59,15 +59,10 @@ let toasterOption = {
 };
 
 const initialFormValue = {
- 
   image: "",
- 
- 
+
   team: "",
   name: "",
-  
-
-  
 };
 const useStyles = makeStyles(styles);
 
@@ -78,12 +73,7 @@ export default function UserProfile(props) {
   const [formValue, setFormValue] = useState(initialFormValue);
   const [validateError, setValidateError] = useState({});
 
-  const {
-  
-    image,
-    team,
-    name,
-  } = formValue;
+  const { image, team, name } = formValue;
 
   const { id } = useParams();
   // console.log(id,"asdfdsfdsfdsf");
@@ -99,16 +89,14 @@ export default function UserProfile(props) {
 
   const getUserData = async () => {
     var test = await getaboutdata(id);
-    console.log(test,"hgfgh");
+    console.log(test, "hgfgh");
     let formdata = {};
-   
-    
+
     formdata["image"] = test.userValue.image;
-    
-   
+
     formdata["team"] = test.userValue.team;
     formdata["name"] = test.userValue.name;
-   
+
     setFormValue(formdata);
     //setUser(test.userValue);
   };
@@ -120,33 +108,34 @@ export default function UserProfile(props) {
 
   return (
     <div>
-              <DashboardLayout>
-              <Button color="primary" onClick={()=>history(-1)}  >
-                  Back to
-                </Button>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>View</h4>
-              <p className={classes.cardCategoryWhite}>view details</p>
-            </CardHeader>
-            <CardBody>
-              
+      <DashboardLayout>
+        <Button color="primary" onClick={() => history(-1)}>
+          Back to
+        </Button>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="primary">
+                <h4 className={classes.cardTitleWhite}>View</h4>
+                <p className={classes.cardCategoryWhite}>view details</p>
+              </CardHeader>
+              <CardBody>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={3}>
+                    <Typography noWrap className={classes.image}>
+                      Image
+                    </Typography>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={3}>
+                    <img
+                      src={config.API + "/images/user/" + image}
+                      alt="..."
+                      style={{ maxWidth: 200, maxHeight: 200 }}
+                    />
+                    {/* <Box sx={{ typography: "image" }}>{image}</Box> */}
+                  </GridItem>
 
-              <GridContainer>
-              <GridItem xs={12} sm={12} md={3}>
-                  <Typography noWrap className={classes.image}>
-                     Image
-                  </Typography>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                <img src={config.API + "/images/user/" + image} alt="..." style={{maxWidth:200, maxHeight:200}} />
-                  {/* <Box sx={{ typography: "image" }}>{image}</Box> */}
-                </GridItem>
-               
-
-                {/* <GridItem xs={12} sm={12} md={3}>
+                  {/* <GridItem xs={12} sm={12} md={3}>
                   <Typography noWrap className={classes.content}>
                     Content
                   </Typography>
@@ -162,33 +151,28 @@ export default function UserProfile(props) {
                 <GridItem xs={12} sm={12} md={3}>
                   <Box sx={{ typography: "content" }}>{fcontent}</Box>
                 </GridItem> */}
-                 <GridItem xs={12} sm={12} md={3}>
-                  <Typography noWrap className={classes.team}>
-                    Name
-                  </Typography>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <Box sx={{ typography: "name" }}>{name}</Box>
-                </GridItem>
+                  <GridItem xs={12} sm={12} md={3}>
+                    <Typography noWrap className={classes.team}>
+                      Name
+                    </Typography>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={3}>
+                    <Box sx={{ typography: "name" }}>{name}</Box>
+                  </GridItem>
 
-               
-                <GridItem xs={12} sm={12} md={3}>
-                  <Typography noWrap className={classes.team}>
-                  Testimonial content
-                  </Typography>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <Box sx={{ typography: "Team" }}>{team}</Box>
-                </GridItem>
-
-               
-              </GridContainer>
-             
-            
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+                  <GridItem xs={12} sm={12} md={3}>
+                    <Typography noWrap className={classes.team}>
+                      Testimonial content
+                    </Typography>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={3}>
+                    <Box sx={{ typography: "Team" }}>{team}</Box>
+                  </GridItem>
+                </GridContainer>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
       </DashboardLayout>
     </div>
   );

@@ -21,8 +21,20 @@ import App from "App";
 // Material Dashboard 2 React Context Provider
 import { MaterialUIControllerProvider } from "context";
 
+const shouldRenderApp = window.location.pathname;
+
+console.log(shouldRenderApp,"shouldRenderApp")
+
+console.log("shouldRenderAppshouldRenderApp", shouldRenderApp);
+
 ReactDOM.render(
-  <BrowserRouter basename="/admin">
+  <BrowserRouter
+    basename={
+      localStorage.kct_prefix_route && shouldRenderApp != "/"
+        ? localStorage.kct_prefix_route
+        : ""
+    }
+  >
     <MaterialUIControllerProvider>
       <App />
     </MaterialUIControllerProvider>

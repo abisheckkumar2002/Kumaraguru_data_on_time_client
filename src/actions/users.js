@@ -72,7 +72,6 @@ export const updateuser = async (data) => {
   }
 };
 
-
 export const addfile = async (Photofile) => {
   try {
     let bodyFormData = new FormData();
@@ -108,7 +107,7 @@ export const videoadd = async (Photofile) => {
       },
       data: bodyFormData,
     });
-    return {video:respData.data.image,cover:respData.data.coverImage};
+    return { video: respData.data.image, cover: respData.data.coverImage };
   } catch (err) {
     return {
       loading: false,
@@ -181,7 +180,7 @@ export const addcompany = async (data) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.Photofile);
-    
+
     bodyFormData.append("content", data.content);
     let respData = await axios({
       method: "post",
@@ -209,7 +208,7 @@ export const addtestimonial = async (data) => {
     bodyFormData.append("Photofile", data.Photofile);
     bodyFormData.append("name", data.name);
     bodyFormData.append("occupation", data.occupation);
-    
+
     bodyFormData.append("content", data.content);
     let respData = await axios({
       method: "post",
@@ -570,9 +569,7 @@ export const addbanner = async (data) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.Photofile);
-   
-   
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addbanner`,
@@ -598,9 +595,7 @@ export const addtrendingvideo = async (data) => {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.Photofile);
     bodyFormData.append("Photofile2", data.Photofile2);
-   
-   
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addtrendingvideo`,
@@ -623,16 +618,14 @@ export const addtrendingvideo = async (data) => {
 
 export const addmarveltestquestion = async (data) => {
   try {
-    console.log(data)
+    console.log(data);
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.Photofile);
     bodyFormData.append("set", data.set);
     bodyFormData.append("id", data.id);
     bodyFormData.append("topic", data.topic);
     bodyFormData.append("negativemark", data.negativemark);
-   
-   
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/uploadfile`,
@@ -652,7 +645,6 @@ export const addmarveltestquestion = async (data) => {
     };
   }
 };
-
 
 export const addmarveltest = async (data) => {
   try {
@@ -679,9 +671,9 @@ export const addbannerapp = async (data) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.Photofile);
-  
+
     bodyFormData.append("course", data.course);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addbannerapp`,
@@ -710,10 +702,9 @@ export const addteacher = async (data) => {
     bodyFormData.append("email", data.email);
     bodyFormData.append("specialization", data.specialization);
     bodyFormData.append("qualification", data.qualification);
-   
+
     bodyFormData.append("phonenumber", data.phonenumber);
-   
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addteacher`,
@@ -756,7 +747,7 @@ export const addlivecourse = async (data) => {
     bodyFormData.append("targetexam", data.targetexam);
     bodyFormData.append("validity", data.validity);
     bodyFormData.append("testsets", data.testsets);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addlivecourse`,
@@ -773,7 +764,6 @@ export const addlivecourse = async (data) => {
     return {
       loading: false,
       error: err.response.data.errors,
-      
     };
   }
 };
@@ -946,7 +936,6 @@ export const addrecordvideo = async (data) => {
   }
 };
 
-
 export const addmaterialvideo = async (data) => {
   try {
     let respData = await axios({
@@ -1027,7 +1016,7 @@ export const addlivecourse1 = async (data) => {
     bodyFormData.append("title", data.title);
     bodyFormData.append("subject", data.subject);
     bodyFormData.append("targetexam", data.targetexam);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addlivecourse`,
@@ -1048,25 +1037,22 @@ export const addlivecourse1 = async (data) => {
   }
 };
 
-
-
 export const addfreestuff = async (data) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.Photofile);
-    
+
     bodyFormData.append("exam", data.exam);
     bodyFormData.append("classs", data.classs);
     bodyFormData.append("language", data.language);
-    
+
     bodyFormData.append("price", data.price);
-   
+
     bodyFormData.append("title", data.title);
     bodyFormData.append("description", data.description);
     bodyFormData.append("subject", data.subject);
     bodyFormData.append("testsets", data.testsets);
-  
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addfreestuff`,
@@ -1108,11 +1094,7 @@ export const addtestseries = async (data) => {
     bodyFormData.append("subject", data.subject);
     bodyFormData.append("targetexam", data.targetexam);
     bodyFormData.append("testsets", data.testsets);
-    
 
-
-
-   
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addtestseries`,
@@ -1154,7 +1136,6 @@ export const adddirect = async (data) => {
     bodyFormData.append("validity", data.validity);
     bodyFormData.append("testsets", data.testsets);
 
-   
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/adddirect`,
@@ -1194,7 +1175,7 @@ export const addscholarship = async (data) => {
     bodyFormData.append("description", data.description);
     bodyFormData.append("subject", data.subject);
     bodyFormData.append("targetexam", data.targetexam);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addscholarship`,
@@ -1232,8 +1213,7 @@ export const addtab = async (data) => {
     bodyFormData.append("title", data.title);
     bodyFormData.append("description", data.description);
     bodyFormData.append("subject", data.subject);
- 
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addtab`,
@@ -1278,7 +1258,7 @@ export const addmicro = async (data) => {
     bodyFormData.append("subject", data.subject);
     bodyFormData.append("targetexam", data.targetexam);
     bodyFormData.append("validity", data.validity);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addmicro`,
@@ -1321,7 +1301,7 @@ export const addrecorded = async (data) => {
     bodyFormData.append("targetexam", data.targetexam);
     bodyFormData.append("validity", data.validity);
     bodyFormData.append("testsets", data.testsets);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addrecorded`,
@@ -1350,7 +1330,7 @@ export const addevent = async (data) => {
     bodyFormData.append("location", data.location);
     bodyFormData.append("date", data.date);
     bodyFormData.append("content", data.content);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addevent`,
@@ -1377,8 +1357,7 @@ export const addservicedetail = async (data) => {
     bodyFormData.append("Photofile", data.Photofile);
     bodyFormData.append("content", data.content);
     bodyFormData.append("description", data.description);
-   
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addservicedetail`,
@@ -1409,7 +1388,7 @@ export const addabout = async (data) => {
     bodyFormData.append("team", data.team);
     bodyFormData.append("name", data.name);
     bodyFormData.append("occupation", data.occupation);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addabout`,
@@ -1434,14 +1413,13 @@ export const addfame = async (data) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.Photofile);
-    
+
     bodyFormData.append("name", data.name);
-   
+
     bodyFormData.append("exam", data.exam);
-   
+
     bodyFormData.append("content", data.content);
-   
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addfame`,
@@ -1467,7 +1445,7 @@ export const addservice = async (data) => {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.Photofile);
     bodyFormData.append("description", data.description);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addservice`,
@@ -1493,7 +1471,7 @@ export const addindustry = async (data) => {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
     bodyFormData.append("description", data.description);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addindustry`,
@@ -1514,14 +1492,14 @@ export const addindustry = async (data) => {
   }
 };
 
-export const updateindustry = async (data,id) => {
+export const updateindustry = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
     bodyFormData.append("description", data.description);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateindustry/`+id,
+      url: `${config.API}/admin/updateindustry/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -1539,7 +1517,7 @@ export const updateindustry = async (data,id) => {
   }
 };
 
-export const updatetestimonial = async (data,id) => {
+export const updatetestimonial = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -1548,7 +1526,7 @@ export const updatetestimonial = async (data,id) => {
     bodyFormData.append("occupation", data.occupation);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatetestimonial/`+id,
+      url: `${config.API}/admin/updatetestimonial/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -1566,14 +1544,14 @@ export const updatetestimonial = async (data,id) => {
   }
 };
 
-export const updatecompany = async (data,id) => {
+export const updatecompany = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
     bodyFormData.append("content", data.content);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatecompany/`+id,
+      url: `${config.API}/admin/updatecompany/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -1591,7 +1569,7 @@ export const updatecompany = async (data,id) => {
   }
 };
 
-export const updatestory = async (data,id) => {
+export const updatestory = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -1600,7 +1578,7 @@ export const updatestory = async (data,id) => {
     bodyFormData.append("content", data.content);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatestory/`+id,
+      url: `${config.API}/admin/updatestory/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -1617,16 +1595,15 @@ export const updatestory = async (data,id) => {
     };
   }
 };
-export const updatecontact = async (data,id) => {
+export const updatecontact = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatecontact/`+id,
+      url: `${config.API}/admin/updatecontact/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1639,16 +1616,15 @@ export const updatecontact = async (data,id) => {
   }
 };
 
-export const updateprivacypolicy = async (data,id) => {
+export const updateprivacypolicy = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateprivacypolicy/`+id,
+      url: `${config.API}/admin/updateprivacypolicy/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1661,16 +1637,15 @@ export const updateprivacypolicy = async (data,id) => {
   }
 };
 
-export const updateexam = async (data,id) => {
+export const updateexam = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateexam/`+id,
+      url: `${config.API}/admin/updateexam/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1683,16 +1658,15 @@ export const updateexam = async (data,id) => {
   }
 };
 
-export const updatefeed = async (data,id) => {
+export const updatefeed = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatefeed/`+id,
+      url: `${config.API}/admin/updatefeed/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1705,16 +1679,15 @@ export const updatefeed = async (data,id) => {
   }
 };
 
-export const updatefaq = async (data,id) => {
+export const updatefaq = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatefaq/`+id,
+      url: `${config.API}/admin/updatefaq/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1727,16 +1700,15 @@ export const updatefaq = async (data,id) => {
   }
 };
 
-export const updatesubject = async (data,id) => {
+export const updatesubject = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatesubject/`+id,
+      url: `${config.API}/admin/updatesubject/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1749,17 +1721,15 @@ export const updatesubject = async (data,id) => {
   }
 };
 
-
-export const updaterespectsubject = async (data,id) => {
+export const updaterespectsubject = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updaterespectsubject/`+id,
+      url: `${config.API}/admin/updaterespectsubject/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1772,16 +1742,15 @@ export const updaterespectsubject = async (data,id) => {
   }
 };
 
-export const updatestatic = async (data,id) => {
+export const updatestatic = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatestatic/`+id,
+      url: `${config.API}/admin/updatestatic/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1794,16 +1763,15 @@ export const updatestatic = async (data,id) => {
   }
 };
 
-export const updatetype = async (data,id) => {
+export const updatetype = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatetype/`+id,
+      url: `${config.API}/admin/updatetype/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1816,16 +1784,15 @@ export const updatetype = async (data,id) => {
   }
 };
 
-export const updatewallet = async (data,id) => {
+export const updatewallet = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatewallet/`+id,
+      url: `${config.API}/admin/updatewallet/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1838,16 +1805,15 @@ export const updatewallet = async (data,id) => {
   }
 };
 
-export const updatecoupon = async (data,id) => {
+export const updatecoupon = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatecoupon/`+id,
+      url: `${config.API}/admin/updatecoupon/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1860,16 +1826,15 @@ export const updatecoupon = async (data,id) => {
   }
 };
 
-export const updateclass = async (data,id) => {
+export const updateclass = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateclass/`+id,
+      url: `${config.API}/admin/updateclass/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1882,16 +1847,15 @@ export const updateclass = async (data,id) => {
   }
 };
 
-export const updatetopic = async (data,id) => {
+export const updatetopic = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatetopic/`+id,
+      url: `${config.API}/admin/updatetopic/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -1926,14 +1890,14 @@ export const updatetopic = async (data,id) => {
 //   }
 // };
 
-export const updatesitesetting = async (data,id) => {
+export const updatesitesetting = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
     bodyFormData.append("Photofile2", data.image2);
     bodyFormData.append("address", data.address);
     bodyFormData.append("mail1", data.mail1);
-   
+
     bodyFormData.append("mail2", data.mail2);
     bodyFormData.append("phone2", data.phone2);
     bodyFormData.append("phone1", data.phone1);
@@ -1943,7 +1907,7 @@ export const updatesitesetting = async (data,id) => {
     bodyFormData.append("linkedin", data.linkedin);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatesitesetting/`+id,
+      url: `${config.API}/admin/updatesitesetting/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -1961,15 +1925,13 @@ export const updatesitesetting = async (data,id) => {
   }
 };
 
-
-
-export const updateaboutus = async (data,id) => {
+export const updateaboutus = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
     bodyFormData.append("content", data.content);
     bodyFormData.append("heading", data.heading);
-   
+
     bodyFormData.append("content1", data.content1);
     bodyFormData.append("content2", data.content2);
     bodyFormData.append("content3", data.content3);
@@ -1978,7 +1940,7 @@ export const updateaboutus = async (data,id) => {
     bodyFormData.append("content6", data.content6);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateaboutus/`+id,
+      url: `${config.API}/admin/updateaboutus/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -1996,18 +1958,15 @@ export const updateaboutus = async (data,id) => {
   }
 };
 
-
-
-export const updateeducontent = async (data,id) => {
+export const updateeducontent = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateeducontent/`+id,
+      url: `${config.API}/admin/updateeducontent/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -2020,16 +1979,15 @@ export const updateeducontent = async (data,id) => {
   }
 };
 
-export const updatemission = async (data,id) => {
+export const updatemission = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatemission/`+id,
+      url: `${config.API}/admin/updatemission/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -2042,16 +2000,15 @@ export const updatemission = async (data,id) => {
   }
 };
 
-export const updateindcontent = async (data,id) => {
+export const updateindcontent = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateindcontent/`+id,
+      url: `${config.API}/admin/updateindcontent/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -2064,8 +2021,7 @@ export const updateindcontent = async (data,id) => {
   }
 };
 
-
-export const updateservice = async (data,id) => {
+export const updateservice = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2082,7 +2038,7 @@ export const updateservice = async (data,id) => {
     bodyFormData.append("taste", data.taste);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateservice/`+id,
+      url: `${config.API}/admin/updateservice/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2100,7 +2056,7 @@ export const updateservice = async (data,id) => {
   }
 };
 
-export const updateservicedetail = async (data,id) => {
+export const updateservicedetail = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2115,7 +2071,7 @@ export const updateservicedetail = async (data,id) => {
     bodyFormData.append("content", data.content);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateservicedetail/`+id,
+      url: `${config.API}/admin/updateservicedetail/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2133,7 +2089,7 @@ export const updateservicedetail = async (data,id) => {
   }
 };
 
-export const updatestudy = async (data,id) => {
+export const updatestudy = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2141,7 +2097,7 @@ export const updatestudy = async (data,id) => {
     bodyFormData.append("heading", data.heading);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatestudy/`+id,
+      url: `${config.API}/admin/updatestudy/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2159,7 +2115,7 @@ export const updatestudy = async (data,id) => {
   }
 };
 
-export const updaterecent = async (data,id) => {
+export const updaterecent = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2173,7 +2129,7 @@ export const updaterecent = async (data,id) => {
     bodyFormData.append("heading3", data.heading3);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updaterecent/`+id,
+      url: `${config.API}/admin/updaterecent/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2191,7 +2147,7 @@ export const updaterecent = async (data,id) => {
   }
 };
 
-export const updateblog = async (data,id) => {
+export const updateblog = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2199,7 +2155,7 @@ export const updateblog = async (data,id) => {
     bodyFormData.append("heading", data.heading);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateblog/`+id,
+      url: `${config.API}/admin/updateblog/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2217,15 +2173,15 @@ export const updateblog = async (data,id) => {
   }
 };
 
-export const updatelogo = async (data,id) => {
+export const updatelogo = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
     bodyFormData.append("content", data.content);
-   
+
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatelogo/`+id,
+      url: `${config.API}/admin/updatelogo/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2243,15 +2199,14 @@ export const updatelogo = async (data,id) => {
   }
 };
 
-export const updatebanner = async (data,id) => {
+export const updatebanner = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
-   
-   
+
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatebanner/`+id,
+      url: `${config.API}/admin/updatebanner/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2269,16 +2224,15 @@ export const updatebanner = async (data,id) => {
   }
 };
 
-export const updatetrendingvideo = async (data,id) => {
+export const updatetrendingvideo = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
     bodyFormData.append("Photofile2", data.video);
-   
-   
+
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatetrendingvideo/`+id,
+      url: `${config.API}/admin/updatetrendingvideo/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2296,7 +2250,7 @@ export const updatetrendingvideo = async (data,id) => {
   }
 };
 
-export const updatemarveltest = async (data,id) => {
+export const updatemarveltest = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("eligiblity", data.eligiblity);
@@ -2308,11 +2262,10 @@ export const updatemarveltest = async (data,id) => {
     bodyFormData.append("mark", data.mark);
     bodyFormData.append("time", data.time);
     bodyFormData.append("negativemark", data.negativemark);
-   
-   
+
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatemarveltest/`+id,
+      url: `${config.API}/admin/updatemarveltest/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2330,15 +2283,14 @@ export const updatemarveltest = async (data,id) => {
   }
 };
 
-export const updateappbanner = async (data,id) => {
+export const updateappbanner = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
-   
-   
+
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateappbanner/`+id,
+      url: `${config.API}/admin/updateappbanner/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2356,7 +2308,7 @@ export const updateappbanner = async (data,id) => {
   }
 };
 
-export const updateteacher = async (data,id) => {
+export const updateteacher = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2365,10 +2317,10 @@ export const updateteacher = async (data,id) => {
     bodyFormData.append("email", data.email);
     bodyFormData.append("phonenumber", data.phonenumber);
     bodyFormData.append("qualification", data.qualification);
-    
+
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateteacher/`+id,
+      url: `${config.API}/admin/updateteacher/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2386,8 +2338,7 @@ export const updateteacher = async (data,id) => {
   }
 };
 
-
-export const updatelivecourse = async (data,id) => {
+export const updatelivecourse = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2395,23 +2346,23 @@ export const updatelivecourse = async (data,id) => {
     bodyFormData.append("description", data.description);
     bodyFormData.append("introduction", data.introduction);
     bodyFormData.append("endDate", data.endDate);
-     bodyFormData.append("startDate", data.startDate);
-     bodyFormData.append("totalclasses", data.totalclasses);
-     bodyFormData.append("totaltest", data.totaltest);
-     bodyFormData.append("totalpdf", data.totalpdf);
-     bodyFormData.append("totalquestions", data.totalquestions);
-     bodyFormData.append("price", data.price);
-     bodyFormData.append("eligiblity", data.eligiblity);
-     bodyFormData.append("subject", data.subject);
-     bodyFormData.append("targetexam", data.targetexam);
-     bodyFormData.append("exam", data.exam);
-     bodyFormData.append("teacher", data.teacher);
-     bodyFormData.append("language", data.language);
-     bodyFormData.append("validity", data.validity);
-     bodyFormData.append("testsets", data.testsets);
+    bodyFormData.append("startDate", data.startDate);
+    bodyFormData.append("totalclasses", data.totalclasses);
+    bodyFormData.append("totaltest", data.totaltest);
+    bodyFormData.append("totalpdf", data.totalpdf);
+    bodyFormData.append("totalquestions", data.totalquestions);
+    bodyFormData.append("price", data.price);
+    bodyFormData.append("eligiblity", data.eligiblity);
+    bodyFormData.append("subject", data.subject);
+    bodyFormData.append("targetexam", data.targetexam);
+    bodyFormData.append("exam", data.exam);
+    bodyFormData.append("teacher", data.teacher);
+    bodyFormData.append("language", data.language);
+    bodyFormData.append("validity", data.validity);
+    bodyFormData.append("testsets", data.testsets);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatelivecourse/`+id,
+      url: `${config.API}/admin/updatelivecourse/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2429,7 +2380,7 @@ export const updatelivecourse = async (data,id) => {
   }
 };
 
-export const updatefreestuff = async (data,id) => {
+export const updatefreestuff = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2437,17 +2388,16 @@ export const updatefreestuff = async (data,id) => {
     bodyFormData.append("description", data.description);
     bodyFormData.append("classs", data.classs);
     bodyFormData.append("testsets", data.testsets);
-   
-    
-     bodyFormData.append("price", data.price);
-    
-     bodyFormData.append("subject", data.subject);
-    
-     bodyFormData.append("exam", data.exam);
-     bodyFormData.append("language", data.language);
+
+    bodyFormData.append("price", data.price);
+
+    bodyFormData.append("subject", data.subject);
+
+    bodyFormData.append("exam", data.exam);
+    bodyFormData.append("language", data.language);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatefreestuff/`+id,
+      url: `${config.API}/admin/updatefreestuff/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2465,7 +2415,7 @@ export const updatefreestuff = async (data,id) => {
   }
 };
 
-export const updatetestseries = async (data,id) => {
+export const updatetestseries = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2475,20 +2425,20 @@ export const updatetestseries = async (data,id) => {
     bodyFormData.append("description", data.description);
     bodyFormData.append("introduction", data.introduction);
     bodyFormData.append("endDate", data.endDate);
-     bodyFormData.append("startDate", data.startDate);
-     bodyFormData.append("totalclasses", data.totalclasses);
-     bodyFormData.append("totaltest", data.totaltest);
-     bodyFormData.append("totalpdf", data.totalpdf);
-     bodyFormData.append("totalquestions", data.totalquestions);
-     bodyFormData.append("price", data.price);
-     bodyFormData.append("eligiblity", data.eligiblity);
-     bodyFormData.append("subject", data.subject);
-     bodyFormData.append("targetexam", data.targetexam);
-     bodyFormData.append("exam", data.exam);
-     bodyFormData.append("language", data.language);
+    bodyFormData.append("startDate", data.startDate);
+    bodyFormData.append("totalclasses", data.totalclasses);
+    bodyFormData.append("totaltest", data.totaltest);
+    bodyFormData.append("totalpdf", data.totalpdf);
+    bodyFormData.append("totalquestions", data.totalquestions);
+    bodyFormData.append("price", data.price);
+    bodyFormData.append("eligiblity", data.eligiblity);
+    bodyFormData.append("subject", data.subject);
+    bodyFormData.append("targetexam", data.targetexam);
+    bodyFormData.append("exam", data.exam);
+    bodyFormData.append("language", data.language);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatetestseries/`+id,
+      url: `${config.API}/admin/updatetestseries/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2506,7 +2456,7 @@ export const updatetestseries = async (data,id) => {
   }
 };
 
-export const updatedirect = async (data,id) => {
+export const updatedirect = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2514,22 +2464,22 @@ export const updatedirect = async (data,id) => {
     bodyFormData.append("description", data.description);
     bodyFormData.append("introduction", data.introduction);
     bodyFormData.append("endDate", data.endDate);
-     bodyFormData.append("startDate", data.startDate);
-     bodyFormData.append("totalclasses", data.totalclasses);
-     bodyFormData.append("totaltest", data.totaltest);
-     bodyFormData.append("totalpdf", data.totalpdf);
-     bodyFormData.append("totalquestions", data.totalquestions);
-     bodyFormData.append("price", data.price);
-     bodyFormData.append("eligiblity", data.eligiblity);
-     bodyFormData.append("subject", data.subject);
-     bodyFormData.append("targetexam", data.targetexam);
-     bodyFormData.append("exam", data.exam);
-     bodyFormData.append("language", data.language);
-     bodyFormData.append("validity", data.validity);
-     bodyFormData.append("testsets", data.testsets);
+    bodyFormData.append("startDate", data.startDate);
+    bodyFormData.append("totalclasses", data.totalclasses);
+    bodyFormData.append("totaltest", data.totaltest);
+    bodyFormData.append("totalpdf", data.totalpdf);
+    bodyFormData.append("totalquestions", data.totalquestions);
+    bodyFormData.append("price", data.price);
+    bodyFormData.append("eligiblity", data.eligiblity);
+    bodyFormData.append("subject", data.subject);
+    bodyFormData.append("targetexam", data.targetexam);
+    bodyFormData.append("exam", data.exam);
+    bodyFormData.append("language", data.language);
+    bodyFormData.append("validity", data.validity);
+    bodyFormData.append("testsets", data.testsets);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatedirect/`+id,
+      url: `${config.API}/admin/updatedirect/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2547,7 +2497,7 @@ export const updatedirect = async (data,id) => {
   }
 };
 
-export const updatescholarship = async (data,id) => {
+export const updatescholarship = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2555,20 +2505,20 @@ export const updatescholarship = async (data,id) => {
     bodyFormData.append("description", data.description);
     bodyFormData.append("scholarship", data.scholarship);
     bodyFormData.append("endDate", data.endDate);
-     bodyFormData.append("startDate", data.startDate);
-     bodyFormData.append("totalclasses", data.totalclasses);
-     bodyFormData.append("totaltest", data.totaltest);
-     bodyFormData.append("totalpdf", data.totalpdf);
-     bodyFormData.append("totalquestions", data.totalquestions);
-     bodyFormData.append("price", data.price);
-     bodyFormData.append("eligiblity", data.eligiblity);
-     bodyFormData.append("subject", data.subject);
-     bodyFormData.append("targetexam", data.targetexam);
-     bodyFormData.append("exam", data.exam);
-     bodyFormData.append("language", data.language);
+    bodyFormData.append("startDate", data.startDate);
+    bodyFormData.append("totalclasses", data.totalclasses);
+    bodyFormData.append("totaltest", data.totaltest);
+    bodyFormData.append("totalpdf", data.totalpdf);
+    bodyFormData.append("totalquestions", data.totalquestions);
+    bodyFormData.append("price", data.price);
+    bodyFormData.append("eligiblity", data.eligiblity);
+    bodyFormData.append("subject", data.subject);
+    bodyFormData.append("targetexam", data.targetexam);
+    bodyFormData.append("exam", data.exam);
+    bodyFormData.append("language", data.language);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatescholarship/`+id,
+      url: `${config.API}/admin/updatescholarship/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2586,27 +2536,27 @@ export const updatescholarship = async (data,id) => {
   }
 };
 
-export const updatetab = async (data,id) => {
+export const updatetab = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
     bodyFormData.append("title", data.title);
     bodyFormData.append("description", data.description);
     bodyFormData.append("endDate", data.endDate);
-     bodyFormData.append("startDate", data.startDate);
-     bodyFormData.append("totalclasses", data.totalclasses);
-     bodyFormData.append("totaltest", data.totaltest);
-     bodyFormData.append("totalpdf", data.totalpdf);
-     bodyFormData.append("totalquestions", data.totalquestions);
-     bodyFormData.append("price", data.price);
-     bodyFormData.append("eligiblity", data.eligiblity);
-     bodyFormData.append("subject", data.subject);
-    
-     bodyFormData.append("exam", data.exam);
-     bodyFormData.append("language", data.language);
+    bodyFormData.append("startDate", data.startDate);
+    bodyFormData.append("totalclasses", data.totalclasses);
+    bodyFormData.append("totaltest", data.totaltest);
+    bodyFormData.append("totalpdf", data.totalpdf);
+    bodyFormData.append("totalquestions", data.totalquestions);
+    bodyFormData.append("price", data.price);
+    bodyFormData.append("eligiblity", data.eligiblity);
+    bodyFormData.append("subject", data.subject);
+
+    bodyFormData.append("exam", data.exam);
+    bodyFormData.append("language", data.language);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatetab/`+id,
+      url: `${config.API}/admin/updatetab/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2624,7 +2574,7 @@ export const updatetab = async (data,id) => {
   }
 };
 
-export const updatemicro = async (data,id) => {
+export const updatemicro = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2636,21 +2586,21 @@ export const updatemicro = async (data,id) => {
     bodyFormData.append("description", data.description);
     bodyFormData.append("introduction", data.introduction);
     bodyFormData.append("endDate", data.endDate);
-     bodyFormData.append("startDate", data.startDate);
-     bodyFormData.append("totalclasses", data.totalclasses);
-     bodyFormData.append("totaltest", data.totaltest);
-     bodyFormData.append("totalpdf", data.totalpdf);
-     bodyFormData.append("totalquestions", data.totalquestions);
-     bodyFormData.append("price", data.price);
-     bodyFormData.append("eligiblity", data.eligiblity);
-     bodyFormData.append("subject", data.subject);
-     bodyFormData.append("targetexam", data.targetexam);
-     bodyFormData.append("exam", data.exam);
-     bodyFormData.append("language", data.language);
-     bodyFormData.append("validity", data.validity);
+    bodyFormData.append("startDate", data.startDate);
+    bodyFormData.append("totalclasses", data.totalclasses);
+    bodyFormData.append("totaltest", data.totaltest);
+    bodyFormData.append("totalpdf", data.totalpdf);
+    bodyFormData.append("totalquestions", data.totalquestions);
+    bodyFormData.append("price", data.price);
+    bodyFormData.append("eligiblity", data.eligiblity);
+    bodyFormData.append("subject", data.subject);
+    bodyFormData.append("targetexam", data.targetexam);
+    bodyFormData.append("exam", data.exam);
+    bodyFormData.append("language", data.language);
+    bodyFormData.append("validity", data.validity);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatemicro/`+id,
+      url: `${config.API}/admin/updatemicro/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2668,7 +2618,7 @@ export const updatemicro = async (data,id) => {
   }
 };
 
-export const updaterecorded = async (data,id) => {
+export const updaterecorded = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2677,22 +2627,22 @@ export const updaterecorded = async (data,id) => {
     bodyFormData.append("description", data.description);
     bodyFormData.append("introduction", data.introduction);
     bodyFormData.append("endDate", data.endDate);
-     bodyFormData.append("startDate", data.startDate);
-     bodyFormData.append("totalclasses", data.totalclasses);
-     bodyFormData.append("totaltest", data.totaltest);
-     bodyFormData.append("totalpdf", data.totalpdf);
-     bodyFormData.append("totalquestions", data.totalquestions);
-     bodyFormData.append("price", data.price);
-     bodyFormData.append("eligiblity", data.eligiblity);
-     bodyFormData.append("subject", data.subject);
-     bodyFormData.append("targetexam", data.targetexam);
-     bodyFormData.append("exam", data.exam);
-     bodyFormData.append("language", data.language);
-     bodyFormData.append("validity", data.validity);
-     bodyFormData.append("testsets", data.testsets);
+    bodyFormData.append("startDate", data.startDate);
+    bodyFormData.append("totalclasses", data.totalclasses);
+    bodyFormData.append("totaltest", data.totaltest);
+    bodyFormData.append("totalpdf", data.totalpdf);
+    bodyFormData.append("totalquestions", data.totalquestions);
+    bodyFormData.append("price", data.price);
+    bodyFormData.append("eligiblity", data.eligiblity);
+    bodyFormData.append("subject", data.subject);
+    bodyFormData.append("targetexam", data.targetexam);
+    bodyFormData.append("exam", data.exam);
+    bodyFormData.append("language", data.language);
+    bodyFormData.append("validity", data.validity);
+    bodyFormData.append("testsets", data.testsets);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updaterecorded/`+id,
+      url: `${config.API}/admin/updaterecorded/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2709,7 +2659,7 @@ export const updaterecorded = async (data,id) => {
     };
   }
 };
-export const updateevent = async (data,id) => {
+export const updateevent = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -2719,7 +2669,7 @@ export const updateevent = async (data,id) => {
     bodyFormData.append("content", data.content);
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateevent/`+id,
+      url: `${config.API}/admin/updateevent/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2737,20 +2687,17 @@ export const updateevent = async (data,id) => {
   }
 };
 
-
-export const updateabout = async (data,id) => {
+export const updateabout = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
-    
-   
+
     bodyFormData.append("team", data.team);
     bodyFormData.append("name", data.name);
-   
-  
+
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateabout/`+id,
+      url: `${config.API}/admin/updateabout/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2768,25 +2715,19 @@ export const updateabout = async (data,id) => {
   }
 };
 
-
-
-
-export const updatefame = async (data,id) => {
+export const updatefame = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
-   
+
     bodyFormData.append("content", data.content);
     bodyFormData.append("name", data.name);
-   
+
     bodyFormData.append("exam", data.exam);
-   
-   
-   
-  
+
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatefame/`+id,
+      url: `${config.API}/admin/updatefame/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -2810,7 +2751,7 @@ export const addstudy = async (data) => {
     bodyFormData.append("Photofile", data.Photofile);
     bodyFormData.append("description", data.description);
     bodyFormData.append("heading", data.heading);
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addstudy`,
@@ -2831,15 +2772,12 @@ export const addstudy = async (data) => {
   }
 };
 
-
-
 export const addlogo = async (data) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.Photofile);
     bodyFormData.append("content", data.content);
- 
-   
+
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/addlogo`,
@@ -2860,19 +2798,28 @@ export const addlogo = async (data) => {
   }
 };
 
+
+/// kct api  start
+
+
+
+// login
 export const login = async (data) => {
+  console.log(data, "cdatadatadatadatadatadata");
+  console.log(config.API, "config.APIconfig.APIconfig.API");
   try {
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/login`,
+      url: `${config.API}/login`,
       data,
     });
 
-    localStorage.setItem("admin_token", respData.data.token);
+    localStorage.setItem("kct_login_token", respData.data.token);
+    localStorage.setItem("kct_user_type", respData.data.result.userType);
 
     return {
       loading: false,
-      result: respData.data.result,
+      result: respData.data,
     };
   } catch (err) {
     console.log(err);
@@ -2882,6 +2829,865 @@ export const login = async (data) => {
     };
   }
 };
+
+
+
+// department api
+
+
+//principle Api
+// department list
+
+
+
+export const getDepartmentList = async (filterData) => {
+  console.log("yes",localStorage.kct_user_type);
+  try {
+  
+    const URL =`${config.API}/department`
+
+    const respData = await axios.get(URL, {
+      params: filterData,
+      headers: {
+       Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log("sucesssss",respData.data)
+    return {
+      loading: false,
+      userValue: respData.data.department_list// Assuming you want the data property of the response
+    };
+  } catch (err) {
+    console.log("errorrrr",err)
+    return {
+      loading: false,
+      error: err.response.data.errors
+    };
+  }
+};
+
+
+export const departmentAdd = async (data) => {
+  try {
+
+
+    const URL =`${config.API}/department`
+    const respData = await axios.post(URL, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+    return {
+      loading: false,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+
+
+export const getDepartment = async (id) => {
+  //console.log('yes')
+  try {
+
+
+    const URL =`${config.API}/department/`+id
+
+    const respData = await axios.get(URL,{
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    return {
+      loading: false,
+      userValue: respData,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+
+export const updateDepartment = async (data, id) => {
+  try {
+
+   
+
+    const URL =`${config.API}/department/`+id;
+    
+    const respData = await axios.put(URL,data,{
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    return {
+      loading: false,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+
+
+export const deleteDepartment = async (id) => {
+  try {
+
+    const URL =`${config.API}/department/`+id;
+
+    const resp = await axios.delete(URL, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    console.log(resp,"respresprespresp")
+    return {
+      loading: false,
+      userValue: resp.data,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+};
+
+// staff api
+
+export const addNewStaff = async (data) => {
+  try {
+  
+    const URL =`${config.API}/user/`;
+
+    const respData = await axios.post(URL, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+    return {
+      loading: false,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+
+export const getStaffList = async (filterData) => {
+  console.log("yes");
+  try {
+
+
+    const URL =`${config.API}/user/`
+    const respData = await axios.get(URL, {
+      params: filterData,
+      headers: {
+         Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+    return {
+      loading: false,
+      userValue: respData.data.users// Assuming you want the data property of the response
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors
+    };
+  }
+};
+
+
+export const userTypeList = async (filterData) => {
+  console.log("yes");
+  try {
+ 
+    const URL =`${config.API}/user_type/`
+    const respData = await axios.get(URL, {
+      params: filterData,
+      headers: {
+         Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+    return {
+      loading: false,
+      userValue: respData.data.userType_list// Assuming you want the data property of the response
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors
+    };
+  }
+};
+
+
+
+
+
+
+export const deleteexistingStaff = async (id) => {
+  try {
+
+
+    const URL =`${config.API}/user/`+id;
+    const respData = await axios.delete(URL, {
+     
+      headers: {
+         Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+
+   
+
+    console.log(resp,"respresprespresp")
+    return {
+      loading: false,
+      userValue: respData,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+}
+
+
+
+
+export const getStaffDetail = async (id) => {
+  //console.log('yes')
+  try {
+
+    const URL =`${config.API}/user/`+id;
+    let respData = await axios.get(URL,{
+   
+     
+      headers: {
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+    return {
+      loading: false,
+      userValue: respData.data,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+// adduser
+
+
+export const updateUser = async (data, id) => {
+  try {
+
+   
+
+    const URL =`${config.API}/user/`+id;
+    
+    const respData = await axios.put(URL,data,{
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    return {
+      loading: false,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+
+// criteriatype  api
+
+
+export const eventCriteriaTypeList = async (filterData) => {
+  console.log("yes");
+  try {
+ 
+    const URL =`${config.API}/criteriatype/`
+    const respData = await axios.get(URL, {
+      params: filterData,
+      headers: {
+         Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+    return {
+      loading: false,
+      userValue: respData.data.criteria_type_list// Assuming you want the data property of the response
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors
+    };
+  }
+};
+
+
+
+export const deleteCriteriaType= async (id) => {
+  try {
+
+    const URL =`${config.API}/criteriatype/`+id;
+
+    const resp = await axios.delete(URL, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    console.log(resp,"respresprespresp")
+    return {
+      loading: false,
+      userValue: resp.data,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+};
+
+
+export const AddNewCriteriaType= async (data) => {
+  try {
+
+    const URL =`${config.API}/criteriatype`
+    const respData = await axios.post(URL, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+    return {
+      loading: false,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+export const getCriteriaType = async (id) => {
+  try {
+
+
+    const URL =`${config.API}/criteriatype/`+id;
+    const respData = await axios.get(URL, {
+     
+      headers: {
+         Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+
+   
+
+ 
+    return {
+      loading: false,
+      userValue: respData
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+}
+
+
+
+export const updateCriteriaType = async (data, id) => {
+  try {
+
+   
+
+    const URL =`${config.API}/criteriatype/`+id;
+    
+    const respData = await axios.put(URL,data,{
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    return {
+      loading: false,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+
+
+// event list api
+
+
+
+
+export const eventList = async (filterData) => {
+  console.log("yes",filterData);
+  try {
+
+
+    const URL =`${config.API}/event/`
+
+
+    console.log(URL,"URLURLURLURLURLURL")
+    const respData = await axios.get(URL, {
+      params: filterData,
+      headers: {
+         Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log(respData,"respDatarespDatarespDatarespData")
+
+    return {
+      loading: false,
+      userValue: respData.data// Assuming you want the data property of the response
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors
+    };
+  }
+};
+
+
+export const deleteEvent= async (id) => {
+  try {
+
+    const URL =`${config.API}/event/`+id;
+
+    const resp = await axios.delete(URL, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    console.log(resp,"respresprespresp")
+    return {
+      loading: false,
+      userValue: resp.data,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+};
+
+
+export const getEvent1 = async (id) => {
+  try {
+
+
+    const URL =`${config.API}/event/`+id;
+    const respData = await axios.get(URL, {
+     
+      headers: {
+         Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+
+   
+
+ 
+    return {
+      loading: false,
+      userValue: respData
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+}
+
+
+
+  
+export const updateEvent1 = async (data, id) => {               // name updateEvent1 because the  updateevent already exists in the router
+  try {
+
+   
+
+    const URL =`${config.API}/event/`+id;
+    
+    const respData = await axios.put(URL,data,{
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    return {
+      loading: false,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+
+
+
+
+
+export const eventTypeList = async (filterData) => {
+ 
+  try {
+  
+    const URL =`${config.API}/eventtype`
+
+    const respData = await axios.get(URL, {
+      params: filterData,
+      headers: {
+       Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log("sucesssss",respData.data)
+    return {
+      loading: false,
+      userValue: respData.data.eventType_list// eventType_listeventType_list
+    };
+  } catch (err) {
+    console.log("errorrrr",err)
+    return {
+      loading: false,
+      error: err.response.data.errors
+    };
+  }
+};
+
+
+
+export const AddNewEvent= async (data) => {
+  try {
+
+    const URL =`${config.API}/event`
+    const respData = await axios.post(URL, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+    return {
+      loading: false,
+      result:true
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+
+
+
+export const getAllEventDatalistPrincipal = async (id) => {
+  try {
+
+
+    const URL =`${config.API}/eventData/alllist/`+id;
+    const respData = await axios.get(URL, {
+     
+      headers: {
+         Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+
+   
+
+ 
+    return {
+      loading: false,
+      userValue: respData.data.eventData_list
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+}
+
+
+export const getMyEventDatalist = async (id) => {
+  try {
+
+
+    const URL =`${config.API}/eventData/mylist/`+id;
+    const respData = await axios.get(URL, {
+     
+      headers: {
+         Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+
+   
+
+ 
+    return {
+      loading: false,
+      userValue: respData.data.myevent_list
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+}
+
+export const AddEventData= async (data) => {
+  try {
+
+    let bodyFormData = new FormData();
+    bodyFormData.append("event_Id", data.event_Id);
+    bodyFormData.append("eventData", data.eventData);
+    bodyFormData.append("recordFile", data.recordFile);
+    const URL =`${config.API}/eventData`
+ 
+    const respData = await axios.post(URL, bodyFormData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+    return {
+      loading: false,
+      result:true
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+
+export const getOneEventData = async (id1,id2) => {
+  try {
+
+
+    const URL = `${config.API}/eventData/${id1}/${id2}`;
+
+    const respData = await axios.get(URL, {
+     
+      headers: {
+         Authorization: localStorage.kct_login_token,           //abiff
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return {
+      loading: false,
+      userValue: respData.data
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+}
+
+
+export const updateOneEventData = async (data, id1,id2) => {
+  try {
+    
+    let bodyFormData = new FormData();
+    bodyFormData.append("event_Id", data.event_Id);
+    bodyFormData.append("eventData", data.eventData);
+    bodyFormData.append("recordFile", data.recordFile);
+   
+
+    const URL = `${config.API}/eventData/${id1}/${id2}`;
+    
+    const respData = await axios.put(URL,bodyFormData,{
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    return {
+      loading: false,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors,
+    };
+  }
+};
+
+
+
+
+export const deleteOneEventData= async (id) => {
+  try {
+
+    const URL =`${config.API}/eventData/`+id;
+
+    const resp = await axios.delete(URL, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    console.log(resp,"respresprespresp")
+    return {
+      loading: false,
+      userValue: resp.data,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+};
+
+
+
+
+export const getUserProfile = async () => {
+  try {
+
+
+    const URL =`${config.API}/userprofile`;
+    const respData = await axios.get(URL, {
+     
+      headers: {
+         Authorization: localStorage.kct_login_token,
+        'Content-Type': 'application/json'
+      }
+    });
+ 
+    return {
+      loading: false,
+      userValue: respData.data
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response,
+    };
+  }
+}
+
+
+
+
+
+
+
+
+
+export const updateProfile1 = async (data) => {               // name updateEvent1 because the  updateevent already exists in the router
+  try {
+
+   
+
+    const URL =`${config.API}/userprofile/update/`;
+    
+    const respData = await axios.put(URL,data,{
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.kct_login_token,
+      },
+    });
+
+    return {
+      loading: false,
+    };
+  } catch (err) {
+    return {
+      loading: false,
+      error: err.response.data.errors
+      ,
+    };
+  }
+};
+
+
+
+
 
 export const updatepassword = async (data) => {
   console.log(data, "datadatadata");
@@ -2907,6 +3713,11 @@ export const updatepassword = async (data) => {
     };
   }
 };
+
+
+
+
+
 
 export const getuser = async (id, dispatch) => {
   //console.log('yes')
@@ -3106,8 +3917,6 @@ export const getsubjectrespectlist = async (id, dispatch) => {
   }
 };
 
-
-
 export const getstatic = async (id, dispatch) => {
   //console.log('yes')
   try {
@@ -3306,7 +4115,6 @@ export const getsitesettingdata = async (id, dispatch) => {
   }
 };
 
-
 export const getaboutusdata = async (id, dispatch) => {
   //console.log('yes')
   try {
@@ -3328,12 +4136,6 @@ export const getaboutusdata = async (id, dispatch) => {
     };
   }
 };
-
-
-
-
-
-
 
 export const getcontactform = async (filterData, dispatch) => {
   console.log("yes");
@@ -3375,7 +4177,6 @@ export const getcontactformdata = async (id, dispatch) => {
     };
   }
 };
-
 
 export const gettestimonial = async (id, dispatch) => {
   //console.log('yes')
@@ -3509,8 +4310,6 @@ export const getservicedetail = async (id, dispatch) => {
   }
 };
 
-
-
 export const getstudy = async (id, dispatch) => {
   //console.log('yes')
   try {
@@ -3577,7 +4376,6 @@ export const getlogodata = async (id, dispatch) => {
   }
 };
 
-
 export const getbannerdata = async (id, dispatch) => {
   //console.log('yes')
   try {
@@ -3599,7 +4397,6 @@ export const getbannerdata = async (id, dispatch) => {
     };
   }
 };
-
 
 export const gettrendingvideodata = async (id, dispatch) => {
   //console.log('yes')
@@ -3720,7 +4517,6 @@ export const getagentdetails = async (id) => {
       headers: {
         Authorization: localStorage.agent_token,
       },
-     
     });
     return {
       loading: false,
@@ -3975,7 +4771,6 @@ export const getdirectdata = async (id, dispatch) => {
     };
   }
 };
-
 
 export const getscholarshipdata = async (id, dispatch) => {
   //console.log('yes')
@@ -4548,8 +5343,6 @@ export const deleteclass = async (id, dispatch) => {
   }
 };
 
-
-
 export const deletecontactform = async (id, dispatch) => {
   //console.log('yes');
   try {
@@ -4702,7 +5495,6 @@ export const deletemarveltest = async (id, dispatch) => {
   }
 };
 
-
 export const deleteteacher = async (id, dispatch) => {
   //console.log('yes');
   try {
@@ -4812,7 +5604,6 @@ export const deletedirect = async (id, dispatch) => {
   }
 };
 
-
 export const deletescholarship = async (id, dispatch) => {
   //console.log('yes');
   try {
@@ -4900,7 +5691,6 @@ export const deleterecorded = async (id, dispatch) => {
     };
   }
 };
-
 
 export const deleteservicedetail = async (id, dispatch) => {
   //console.log('yes');
@@ -5034,8 +5824,6 @@ export const deletestudy = async (id, dispatch) => {
   }
 };
 
-
-
 export const deleteblog = async (id, dispatch) => {
   //console.log('yes');
   try {
@@ -5057,7 +5845,6 @@ export const deleteblog = async (id, dispatch) => {
     };
   }
 };
-
 
 export const getuserdata = async (token, dispatch) => {
   console.log("yes");
@@ -5100,7 +5887,6 @@ export const getuserlist = async (filterData, dispatch) => {
     };
   }
 };
-
 
 export const getbloglist = async (filterData, dispatch) => {
   console.log("yes");
@@ -5242,8 +6028,6 @@ export const getcourselist = async (filterData, dispatch) => {
   }
 };
 
-
-
 export const getstaticlist = async (filterData, dispatch) => {
   console.log("yes");
   try {
@@ -5288,7 +6072,7 @@ export const getlivecoursevideodata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getlivecoursevideodata/`+id
+      url: `${config.API}/admin/getlivecoursevideodata/` + id,
     });
     return {
       loading: false,
@@ -5307,7 +6091,7 @@ export const getdirectcoursevideodata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getdirectcoursevideodata/`+id
+      url: `${config.API}/admin/getdirectcoursevideodata/` + id,
     });
     return {
       loading: false,
@@ -5326,7 +6110,7 @@ export const getlivecoursepdfdata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getlivecoursepdfdata/`+id
+      url: `${config.API}/admin/getlivecoursepdfdata/` + id,
     });
     return {
       loading: false,
@@ -5345,7 +6129,7 @@ export const getdirectcoursepdfdata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getdirectcoursepdfdata/`+id
+      url: `${config.API}/admin/getdirectcoursepdfdata/` + id,
     });
     return {
       loading: false,
@@ -5364,7 +6148,7 @@ export const deletefile = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "delete",
-      url: `${config.API}/admin/deletefile/`+id
+      url: `${config.API}/admin/deletefile/` + id,
     });
     return {
       loading: false,
@@ -5383,7 +6167,7 @@ export const deletefilematerial = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "delete",
-      url: `${config.API}/admin/deletefilematerial/`+id
+      url: `${config.API}/admin/deletefilematerial/` + id,
     });
     return {
       loading: false,
@@ -5402,7 +6186,7 @@ export const getrecordedvideodata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getrecordedvideodata/`+id
+      url: `${config.API}/admin/getrecordedvideodata/` + id,
     });
     return {
       loading: false,
@@ -5421,7 +6205,7 @@ export const getrecordedpdfdata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getrecordedpdfdata/`+id
+      url: `${config.API}/admin/getrecordedpdfdata/` + id,
     });
     return {
       loading: false,
@@ -5440,7 +6224,7 @@ export const getfreestuffvideodata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getfreestuffvideodata/`+id
+      url: `${config.API}/admin/getfreestuffvideodata/` + id,
     });
     return {
       loading: false,
@@ -5459,7 +6243,7 @@ export const getfreestuffpdfdata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getfreestuffpdfdata/`+id
+      url: `${config.API}/admin/getfreestuffpdfdata/` + id,
     });
     return {
       loading: false,
@@ -5478,7 +6262,7 @@ export const getmicrovideodata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getmicrovideodata/`+id
+      url: `${config.API}/admin/getmicrovideodata/` + id,
     });
     return {
       loading: false,
@@ -5497,7 +6281,7 @@ export const getmicropdfdata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getmicropdfdata/`+id
+      url: `${config.API}/admin/getmicropdfdata/` + id,
     });
     return {
       loading: false,
@@ -5676,7 +6460,7 @@ export const gettopiclist = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/topiclist/`+id,
+      url: `${config.API}/admin/topiclist/` + id,
     });
     return {
       loading: false,
@@ -5695,7 +6479,7 @@ export const gettesttopiclist = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/testtopiclistforquestionadd/`+id,
+      url: `${config.API}/admin/testtopiclistforquestionadd/` + id,
     });
     return {
       loading: false,
@@ -5788,7 +6572,6 @@ export const getaboutuslist = async (filterData, dispatch) => {
     };
   }
 };
-
 
 export const getcompanylist = async (filterData, dispatch) => {
   console.log("yes");
@@ -5910,8 +6693,6 @@ export const getindlist = async (filterData, dispatch) => {
   }
 };
 
-
-
 export const getbannerlist = async (filterData, dispatch) => {
   console.log("yes");
   try {
@@ -5932,10 +6713,9 @@ export const getbannerlist = async (filterData, dispatch) => {
   }
 };
 
-
 export const filterdate = async (data) => {
   try {
-    console.log(data,"aaa")
+    console.log(data, "aaa");
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/filterdate`,
@@ -5945,13 +6725,10 @@ export const filterdate = async (data) => {
       data: data,
     });
 
-    console.log(
-      "afterapifetch",respData.data
-    )
+    console.log("afterapifetch", respData.data);
     return {
       userValue: respData.data.userValue,
       loading: false,
-
     };
   } catch (err) {
     return {
@@ -5986,8 +6763,7 @@ export const getagentearninglist = async (id) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/agentearninglist/`+id,
-      
+      url: `${config.API}/admin/agentearninglist/` + id,
     });
     return {
       loading: false,
@@ -6006,8 +6782,7 @@ export const getagentstatus = async (id) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/agentpaystatus/`+id,
-      
+      url: `${config.API}/admin/agentpaystatus/` + id,
     });
     return {
       loading: false,
@@ -6026,8 +6801,7 @@ export const getagentaccount = async (id) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/agentaccount/`+id,
-      
+      url: `${config.API}/admin/agentaccount/` + id,
     });
     return {
       loading: false,
@@ -6041,14 +6815,13 @@ export const getagentaccount = async (id) => {
   }
 };
 
-export const updateagentstatus = async (data,id) => {
+export const updateagentstatus = async (data, id) => {
   console.log("yes");
   try {
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updateagentpaystatus/`+id,
-      data:data,
-      
+      url: `${config.API}/admin/updateagentpaystatus/` + id,
+      data: data,
     });
     return {
       loading: false,
@@ -6128,7 +6901,7 @@ export const getteacherlist = async (searchvalue, dispatch) => {
     let respData = await axios({
       method: "get",
       url: `${config.API}/admin/teacherlist`,
-      params: {name:searchvalue},
+      params: { name: searchvalue },
     });
     return {
       loading: false,
@@ -6141,8 +6914,6 @@ export const getteacherlist = async (searchvalue, dispatch) => {
     };
   }
 };
-
-
 
 export const getlivecourselist = async (filterData, dispatch) => {
   console.log("yes");
@@ -6570,7 +7341,6 @@ export const resetPassword = async (data) => {
   }
 };
 
-
 export const dashboardcourse = async (data) => {
   // console.log('yes')
   try {
@@ -6580,7 +7350,7 @@ export const dashboardcourse = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6603,7 +7373,7 @@ export const dashboarduser = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6617,7 +7387,6 @@ export const dashboarduser = async (data) => {
   }
 };
 
-
 export const dashboardcoursetoday = async (data) => {
   // console.log('yes')
   try {
@@ -6627,7 +7396,7 @@ export const dashboardcoursetoday = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6650,7 +7419,7 @@ export const dashboarduseryear = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6673,7 +7442,7 @@ export const dashboardcourseyear = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6696,7 +7465,7 @@ export const dashboardamountyear = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6719,15 +7488,15 @@ export const examcategorycount = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
-   
+
     return {
       loading: false,
       examcategorycount: respData.data.userValue,
     };
   } catch (err) {
-    console.log(respData,"vvv")
+    console.log(respData, "vvv");
     return {
       loading: false,
       error: err.response.data.errors,
@@ -6744,7 +7513,7 @@ export const dashboardtotaluser = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6767,7 +7536,7 @@ export const dashboardtotalteacher = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6790,7 +7559,7 @@ export const dashboardtotalcourse = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6813,7 +7582,7 @@ export const paidstudents = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6836,7 +7605,7 @@ export const livecoursecount = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6859,7 +7628,7 @@ export const testcoursecount = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6882,7 +7651,7 @@ export const directcoursecount = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6905,7 +7674,7 @@ export const scholarshipcoursecount = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6919,7 +7688,6 @@ export const scholarshipcoursecount = async (data) => {
   }
 };
 
-
 export const tabcoursecount = async (data) => {
   // console.log('yes')
   try {
@@ -6929,7 +7697,7 @@ export const tabcoursecount = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6952,7 +7720,7 @@ export const microcoursecount = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6975,7 +7743,7 @@ export const recordedcoursecount = async (data) => {
       headers: {
         Authorization: localStorage.user_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -6989,27 +7757,21 @@ export const recordedcoursecount = async (data) => {
   }
 };
 
-
-
-
 //testmodule
-export const topiclist = async (id,data) => {
+export const topiclist = async (id, data) => {
   // console.log('yes')
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/gettopiclist/`+id,
+      url: `${config.API}/admin/gettopiclist/` + id,
       headers: {
         Authorization: localStorage.user_token,
       },
-     
     });
     return {
       loading: false,
       topiclist: respData.data.userValue,
-      
     };
-   
   } catch (err) {
     return {
       loading: false,
@@ -7018,23 +7780,20 @@ export const topiclist = async (id,data) => {
   }
 };
 
-export const testtopiclist = async (id,data) => {
+export const testtopiclist = async (id, data) => {
   // console.log('yes')
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/gettesttopiclistfortest/`+id,
+      url: `${config.API}/admin/gettesttopiclistfortest/` + id,
       headers: {
         Authorization: localStorage.user_token,
       },
-     
     });
     return {
       loading: false,
       topiclist: respData.data.userValue,
-      
     };
-   
   } catch (err) {
     return {
       loading: false,
@@ -7042,7 +7801,6 @@ export const testtopiclist = async (id,data) => {
     };
   }
 };
-
 
 export const getsettopic = async (id, dispatch) => {
   //console.log('yes')
@@ -7066,17 +7824,15 @@ export const getsettopic = async (id, dispatch) => {
   }
 };
 
-
-export const updatesettopic = async (data,id) => {
+export const updatesettopic = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatesettopic/`+id,
+      url: `${config.API}/admin/updatesettopic/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -7111,7 +7867,6 @@ export const getquestiondata = async (id, dispatch) => {
   }
 };
 
-
 export const getsetquestion = async (id, dispatch) => {
   //console.log('yes')
   try {
@@ -7133,7 +7888,6 @@ export const getsetquestion = async (id, dispatch) => {
     };
   }
 };
-
 
 // export const updatequestion = async (data,id) => {
 //   try {
@@ -7157,7 +7911,7 @@ export const getsetquestion = async (id, dispatch) => {
 //   }
 // };
 
-export const updatequestion = async (data,id) => {
+export const updatequestion = async (data, id) => {
   try {
     let bodyFormData = new FormData();
     bodyFormData.append("Photofile", data.image);
@@ -7165,10 +7919,10 @@ export const updatequestion = async (data,id) => {
     bodyFormData.append("questionnumber", data.questionnumber);
     bodyFormData.append("options", data.options);
     bodyFormData.append("setname", data.setname);
-    
+
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatesetquestion/`+id,
+      url: `${config.API}/admin/updatesetquestion/` + id,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: localStorage.admin_token,
@@ -7194,7 +7948,7 @@ export const getlivecoursebatcheslist = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/livebatcheslist/`+id,
+      url: `${config.API}/admin/livebatcheslist/` + id,
     });
     return {
       loading: false,
@@ -7227,11 +7981,8 @@ export const getliveallbatcheslist = async () => {
   }
 };
 
-
 export const livecoursebatchadd = async (data) => {
   try {
-
-   
     let respData = await axios({
       method: "post",
       url: `${config.API}/admin/livecoursebatchadd`,
@@ -7255,7 +8006,7 @@ export const getlivebatchesstudentslist = async (c_id, b_id) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/livebatchesstudentslist/`+c_id+"/"+b_id,
+      url: `${config.API}/admin/livebatchesstudentslist/` + c_id + "/" + b_id,
     });
     return {
       loading: false,
@@ -7273,7 +8024,7 @@ export const getunallotedstudentsinbatchlist = async (c_id) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/unallotedstudentsinbatchlist/`+c_id,
+      url: `${config.API}/admin/unallotedstudentsinbatchlist/` + c_id,
     });
     return {
       loading: false,
@@ -7287,11 +8038,11 @@ export const getunallotedstudentsinbatchlist = async (c_id) => {
   }
 };
 
-export const getallotedstudentsinbatchlist= async (c_id) => {
+export const getallotedstudentsinbatchlist = async (c_id) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/allotedstudentsinbatchlist/`+c_id,
+      url: `${config.API}/admin/allotedstudentsinbatchlist/` + c_id,
     });
     return {
       loading: false,
@@ -7326,18 +8077,14 @@ export const livecoursebatchstudentadd = async (data) => {
   }
 };
 
-
 export const downloadquestions = async (id) => {
   try {
-
-   
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/questionexcel/`+id,
+      url: `${config.API}/admin/questionexcel/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      
     });
     return {
       loading: false,
@@ -7350,7 +8097,6 @@ export const downloadquestions = async (id) => {
     };
   }
 };
-
 
 export const getbatchdata = async (id, dispatch) => {
   //console.log('yes')
@@ -7374,7 +8120,6 @@ export const getbatchdata = async (id, dispatch) => {
   }
 };
 
-
 export const getbactchteacher = async (id, dispatch) => {
   //console.log('yes')
   try {
@@ -7397,13 +8142,11 @@ export const getbactchteacher = async (id, dispatch) => {
   }
 };
 
-
-export const updatebatch = async (data,id) => {
+export const updatebatch = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatebatch/`+id,
+      url: `${config.API}/admin/updatebatch/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
@@ -7463,7 +8206,6 @@ export const deletebatch = async (id, dispatch) => {
 //   }
 // };
 
-
 export const deletebatchstudent = async (id, data) => {
   //console.log('yes');
   try {
@@ -7473,7 +8215,7 @@ export const deletebatchstudent = async (id, data) => {
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data
+      data: data,
     });
     return {
       loading: false,
@@ -7487,16 +8229,12 @@ export const deletebatchstudent = async (id, data) => {
   }
 };
 
-
-
-
-
 export const upcomingSchedules = async (id, b_id) => {
   console.log("yes");
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/upcomingschedules/`+id +'/'+b_id,
+      url: `${config.API}/admin/upcomingschedules/` + id + "/" + b_id,
       headers: {
         Authorization: localStorage.admin_token,
       },
@@ -7506,7 +8244,7 @@ export const upcomingSchedules = async (id, b_id) => {
       userValue: respData.data.user,
     };
   } catch (err) {
-    return {  
+    return {
       loading: false,
       error: err.response.data.errors,
     };
@@ -7518,7 +8256,7 @@ export const completedSchedules = async (id, b_id) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/completedschedules/`+id+'/'+b_id,
+      url: `${config.API}/admin/completedschedules/` + id + "/" + b_id,
       headers: {
         Authorization: localStorage.admin_token,
       },
@@ -7528,13 +8266,12 @@ export const completedSchedules = async (id, b_id) => {
       userValue: respData.data.user,
     };
   } catch (err) {
-    return {  
+    return {
       loading: false,
       error: err.response.data.errors,
     };
   }
 };
-
 
 export const allupcomingschedule = async () => {
   console.log("yes");
@@ -7551,7 +8288,7 @@ export const allupcomingschedule = async () => {
       userValue: respData.data.user,
     };
   } catch (err) {
-    return {  
+    return {
       loading: false,
       error: err.response.data.errors,
     };
@@ -7573,7 +8310,7 @@ export const allcompletedschedules = async () => {
       userValue: respData.data.user,
     };
   } catch (err) {
-    return {  
+    return {
       loading: false,
       error: err.response.data.errors,
     };
@@ -7601,8 +8338,6 @@ export const createzoommeeting = async (data) => {
   }
 };
 
-
-
 export const getzoommeet = async (id, dispatch) => {
   //console.log('yes')
   try {
@@ -7625,16 +8360,15 @@ export const getzoommeet = async (id, dispatch) => {
   }
 };
 
-export const updatezoommeeting = async (data,id) => {
+export const updatezoommeeting = async (data, id) => {
   try {
-
     let respData = await axios({
       method: "post",
-      url: `${config.API}/admin/updatezoommeeting/`+id,
+      url: `${config.API}/admin/updatezoommeeting/` + id,
       headers: {
         Authorization: localStorage.admin_token,
       },
-      data:data,
+      data: data,
     });
     return {
       loading: false,
@@ -7669,7 +8403,6 @@ export const deletezoommeet = async (id, dispatch) => {
   }
 };
 
-
 export const getregister = async (id, dispatch) => {
   //console.log('yes')
   try {
@@ -7692,8 +8425,6 @@ export const getregister = async (id, dispatch) => {
   }
 };
 
-
-
 export const getregisterlist = async (filterData, dispatch) => {
   console.log("yes");
   try {
@@ -7714,7 +8445,6 @@ export const getregisterlist = async (filterData, dispatch) => {
   }
 };
 
-
 export const gettestsetlist = async (filterData, dispatch) => {
   console.log("yes");
   try {
@@ -7726,7 +8456,6 @@ export const gettestsetlist = async (filterData, dispatch) => {
     return {
       loading: false,
       userValue: respData.data.userValue,
-     
     };
   } catch (err) {
     return {
@@ -7735,7 +8464,6 @@ export const gettestsetlist = async (filterData, dispatch) => {
     };
   }
 };
-
 
 export const addsubtopic = async (data) => {
   try {
@@ -7757,7 +8485,6 @@ export const addsubtopic = async (data) => {
     };
   }
 };
-
 
 export const getsubchapterrespectlist = async (id, dispatch) => {
   //console.log('yes')
@@ -7781,7 +8508,6 @@ export const getsubchapterrespectlist = async (id, dispatch) => {
   }
 };
 
-
 export const deletesubchapterrespect = async (id, dispatch) => {
   //console.log('yes');
   try {
@@ -7803,7 +8529,6 @@ export const deletesubchapterrespect = async (id, dispatch) => {
     };
   }
 };
-
 
 export const getsubtopicrespectlist = async (id, dispatch) => {
   //console.log('yes')
@@ -7870,7 +8595,6 @@ export const addsubundertopic = async (data) => {
   }
 };
 
-
 export const addsubchaptervideo = async (data) => {
   try {
     let respData = await axios({
@@ -7892,13 +8616,12 @@ export const addsubchaptervideo = async (data) => {
   }
 };
 
-
 export const getsubchaptervideodata = async (id, dispatch) => {
   console.log("yes");
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getsubchaptervideodata/`+id
+      url: `${config.API}/admin/getsubchaptervideodata/` + id,
     });
     return {
       loading: false,
@@ -7917,7 +8640,7 @@ export const getsubchapterpdfdata = async (id, dispatch) => {
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getsubchapterpdfdata/`+id
+      url: `${config.API}/admin/getsubchapterpdfdata/` + id,
     });
     return {
       loading: false,
@@ -7930,14 +8653,13 @@ export const getsubchapterpdfdata = async (id, dispatch) => {
     };
   }
 };
-
 
 export const deletesubchapterfile = async (id, dispatch) => {
   console.log("yes");
   try {
     let respData = await axios({
       method: "delete",
-      url: `${config.API}/admin/deletesubchapterfile/`+id
+      url: `${config.API}/admin/deletesubchapterfile/` + id,
     });
     return {
       loading: false,
@@ -7950,8 +8672,6 @@ export const deletesubchapterfile = async (id, dispatch) => {
     };
   }
 };
-
-
 
 export const addsubpdf = async (data) => {
   try {
@@ -7974,13 +8694,12 @@ export const addsubpdf = async (data) => {
   }
 };
 
-
 export const getsubpdfdata = async (id, dispatch) => {
   console.log("yes");
   try {
     let respData = await axios({
       method: "get",
-      url: `${config.API}/admin/getlivecoursepdfdata/`+id
+      url: `${config.API}/admin/getlivecoursepdfdata/` + id,
     });
     return {
       loading: false,
@@ -7993,9 +8712,3 @@ export const getsubpdfdata = async (id, dispatch) => {
     };
   }
 };
-
-
-
-
-
-

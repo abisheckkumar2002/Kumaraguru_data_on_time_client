@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Icon from "@mui/material/Icon";
@@ -8,7 +14,7 @@ import Sidenav from "examples/Sidenav";
 import Configurator from "examples/Configurator";
 import theme from "assets/theme";
 import themeDark from "assets/theme-dark";
-import routes from "routes";
+
 import {
   useMaterialUIController,
   setMiniSidenav,
@@ -20,6 +26,7 @@ import Changepassword from "layouts/authentication/changepass/changepass";
 // Images
 import brandWhite from "assets/images/logo.png";
 import brandDark from "assets/images/logo.png";
+import { route1,routes } from "routes";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -36,6 +43,8 @@ export default function App() {
   const [onMouseEnter, setOnMouseEnter] = useState(false);
 
   const { pathname } = useLocation();
+
+  const navigate = useNavigate();
 
   // Open sidenav when mouse enter on mini sidenav
   const handleOnMouseEnter = () => {
@@ -68,6 +77,23 @@ export default function App() {
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
 
+  const PROPS = () => {
+    if (window.location.pathname == "/") {
+      window.location = localStorage.kct_prefix_route + "/dashboard";
+    } else if (
+      window.location.pathname ==
+      "/" + localStorage.kct_prefix_route
+    ) {
+      window.location = localStorage.kct_prefix_route + "/dashboard";
+    } else if (
+      window.location.pathname ==
+      "/" + localStorage.kct_prefix_route + "/"
+    ) {
+      window.location = "/" + localStorage.kct_prefix_route + "/dashboard";
+    }
+    return null;
+  };
+
   const getRoutes = (allRoutes) => (
     <Routes>
       {allRoutes.map((route) => {
@@ -75,11 +101,14 @@ export default function App() {
         //   console.log("Router", route.collapse);
         //   return getRoutes(route.collapse);
         // }
+        // console.log(route.route,"route.routeroute.routeroute.route")
+        // if(localStorage.kct_prefix_route){
+        //   route.route=localStorage.kct_prefix_route+route.route}
 
+        //   console.log(route.route,"localStoragelocalStoragelocalStoragelocalStorage")
         if (route.route) {
           return (
             <Route
-             
               path={route.route}
               element={route.component}
               key={route.key}
@@ -89,15 +118,26 @@ export default function App() {
 
         return null;
       })}
-      
-      <Route path="*" element={<Navigate to="/dashboard" />} />
+
+      <Route path="*" element={<PROPS />} />
     </Routes>
   );
 
   const getdhgghghg = () => {
-    if (!localStorage.admin_token) {
-      return getRoutes(routes);
-    } else if (!localStorage.admin_token) {
+    if (localStorage.kct_login_token) {
+      
+      if (localStorage.kct_user_type == "Principal"||"Admin") {
+        
+          return getRoutes(route1);
+         
+       
+      }
+      else{
+
+        return getRoutes(routes);
+
+      }
+    } else if (!localStorage.kct_login_token) {
       return (
         <Routes>
           <Route exact path="/login" element={<SignIn />} key="sign-in" />
@@ -146,7 +186,7 @@ export default function App() {
   return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
-      {layout === "dashboard" && (
+      {layout === "dashboard" && localStorage.kct_login_token && (
         <>
           <Sidenav
             color={sidenavColor}
@@ -156,7 +196,7 @@ export default function App() {
                 : brandWhite
             }
             brandName="KUMARAGURU"
-            routes={routes}
+            routes={route1}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
           />

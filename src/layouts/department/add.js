@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import { useHistory, useLocation } from "react-router-dom";
 //import avatar from "assets/img/faces/marc.jpg";
 import isEmpty from "lib/isEmpty";
+import { departmentAdd } from "actions/users";
 
 const styles = {
   cardCategoryWhite: {
@@ -33,7 +34,8 @@ const styles = {
     marginBottom: "0",
   },
   textDanger: {
-    color: "rgb(148,44,174)",
+    color: "red",
+    fontSize: "15px",
   },
   cardTitleWhite: {
     color: "#FFFFFF",
@@ -47,9 +49,9 @@ const styles = {
   },
 };
 
-const initialFormValue = {
-  department: "",
-};
+
+
+
 
 const useStyles = makeStyles(styles);
 
@@ -57,50 +59,47 @@ const department = () => {
 
   
   const classes = useStyles();
-  const history = useNavigate();
 
-  const [formValue, setFormValue] = useState(initialFormValue);
+  const navigate = useNavigate();
+
+  const [formValue, setFormValue] = useState({
+    department: "",
+    sortForm:""
+  });
+
   const [validateError, setValidateError] = useState({});
   console.log("validateError", validateError);
 
-  const { department } = formValue;
+  const { department ,sortForm} = formValue;
 
-  //function
 
-  // const  dd ={_id:"abisheck",jeya:""}
-  // let abi = {...dd,...{[_id]:"jeya"}}
-  // console.log("testtest",abi);
   
 
-  // const dd = { _id: "abisheck", jeya: "this is the abisheck kumar" };
-  // const jeya = "jeya"; // Define _id as a string
-  // console.log("test test1", typeof _id);
-  // console.log("test test2", typeof dd. _id);
-  // let abi = { ...dd, ...{ [jeya]: "" } };
-  // console.log("test test", abi);
 
-  const onChange = (e) => {
+  const handleFormSubmit = async(e)=>{
+
+
     e.preventDefault();
-    console.log(e.target,'e.target')
 
-    const { id, value } = e.target;
-    let formData = { ...formValue, ...{ [id]: value } };
-    setFormValue(formData);
-    console.log(formValue,"formValueformValue");
+    let { error, result } =await departmentAdd(formValue)
 
-   
-  };
+    console.log(result,"resultresultresultresultresultresult")
+    console.log(error,"errorerrorerrorerrorerrorerror")
+    if(isEmpty(error)){
+      toast.success("Added Successfully");
+      navigate( `/department`)
+    
+    }
+    else{
+      setValidateError(error)
+    }
 
 
-  const handleFormSubmit = ()=>{
-
-
-    //  add department api fetching 
   }
   return (
     <div>
       <DashboardLayout>
-        <Button color="primary" onClick={() => history(-1)}>
+        <Button color="primary" onClick={() => navigate(-1)}>
           Back to
         </Button>
         <GridContainer>
@@ -121,7 +120,10 @@ const department = () => {
                     <GridItem xs={12} sm={12} md={4}>
                       <CustomInput
                         labelText="Department"
-                        onChange={onChange}
+                        onChange={(e) =>
+                          setFormValue({ ...formValue, department: e.target.value })
+                        }
+                      
                         value={department}
                         id="department"
                         formControlProps={{
@@ -131,6 +133,27 @@ const department = () => {
                       {validateError.department && (
                         <span className={classes.textDanger}>
                           {validateError.department}
+                        </span>
+                      )}
+                    </GridItem>
+
+
+                    <GridItem xs={12} sm={12} md={4}>
+                      <CustomInput
+                        labelText="SORT FORM"
+                        onChange={(e) =>
+                          setFormValue({ ...formValue, sortForm: e.target.value })
+                        }
+                      
+                        value={sortForm}
+                        id="sortForm"
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                      />
+                      {validateError.sortForm && (
+                        <span className={classes.textDanger}>
+                          {validateError.sortForm}
                         </span>
                       )}
                     </GridItem>

@@ -30,7 +30,7 @@ import { Button } from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import { confirm } from "react-confirm-box";
-
+import { toast } from "react-toastify";
 // Data
 // import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 // import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
@@ -157,6 +157,7 @@ function Dashboard() {
   const [microcount, setmicrocount] = useState(0);
   const [recordedcount, setrecordedcount] = useState(0);
   const [examcategorycount1, setexamcategorycount1] = useState([]);
+
   const history = useNavigate();
 
   const amount = noofyearamount;
@@ -287,14 +288,17 @@ function Dashboard() {
   //   setrecordedcount(test7.recordedcoursecount);
   // };
 
-  const logoutfuns = async (reqData) => {
+  const logoutfuns = async () => {
     const test = await confirm("Are you sure do you want to logout?");
     console.log(test, "sss");
-    // if (test) {
-    //   localStorage.removeItem("admin_token");
-    //   history("/login");
-    //   swal("Logged out Successfully");
-    // }
+    if (test) {
+      localStorage.removeItem("kct_login_token");
+      localStorage.removeItem("kct_user_type");
+      localStorage.removeItem("kct_prefix_route");
+
+      window.location = "/login";
+      toast.success("Logout Sucessfully");
+    }
   };
 
   useEffect(() => {
@@ -304,11 +308,11 @@ function Dashboard() {
 
   return (
     <DashboardLayout>
-      {/* <a href="https://marvelclasses.freshdesk.com/support/home">
+      <a>
         <Button className="ml-3" variant="contained" color="primary">
-          FRESH DESK-LOGIN
+          Update Profile
         </Button>
-      </a> */}
+      </a>
 
       <a className="flogin" type="button" onClick={logoutfuns}>
         <Button className="ml-3" variant="contained" color="primary">
@@ -317,34 +321,15 @@ function Dashboard() {
       </a>
 
       <Card style={{ marginTop: "3%" }}>
+       
         <MDBox py={3}>
-          <Grid container spacing={3}>
-            {/* <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={2}>
-                <ComplexStatisticsCard
-                  color="success"
-                  icon="email"
-                  title={"NO OF EVENTS"}
-                  count={totalnoofusers}
-                  percentage={{
-                    color: "success",
-                    // amount: "Full Details ->",
-                  }}
-                />
-              </MDBox>
-              <Link to="/registerindex">
-                <Button className="ml-3" variant="contained" color="primary">
-                  NO OF Events
-                </Button>
-              </Link>
-            </Grid> */}
-
+          <Grid container spacing={5}>
             <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={1.5}>
+              <MDBox mb={3}>
                 <ComplexStatisticsCard
                   color="success"
                   icon="email"
-                  title={"NO OF DEPARTMENT"}
+                  title={"NO OF ADMIN"}
                   count={noofteachers}
                   percentage={{
                     color: "success",
@@ -354,18 +339,17 @@ function Dashboard() {
               </MDBox>
               <Link to="/teacherindex">
                 <Button className="ml-3" variant="contained" color="primary">
-                  NO OF DEPARTMENT
+                ADMIN
                 </Button>
               </Link>
             </Grid>
 
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={1.5}>
-                
                 <ComplexStatisticsCard
                   color="success"
                   icon="email"
-                  title={"NO OF COURSES"}
+                  title={"NO OF HOD"}
                   count={totalnoofcourse}
                   percentage={{
                     color: "success",
@@ -375,30 +359,82 @@ function Dashboard() {
               </MDBox>
               <Link to="/livecourseindex">
                 <Button className="ml-3" variant="contained" color="primary">
-                  NO OF COURSES
+                 HEAD OF DEPARTMENT
+                </Button>
+              </Link>
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={4}>
+              <MDBox mb={1.5}>
+                <ComplexStatisticsCard
+                  color="success"
+                  icon="email"
+                  title={"NO OF FACULTY"}
+                  count={totalnoofcourse}
+                  percentage={{
+                    color: "success",
+                    // amount: "Full Details ->",
+                  }}
+                />
+              </MDBox>
+              <Link to="/livecourseindex">
+                <Button className="ml-3" variant="contained" color="primary">
+                 FACULTY
+                </Button>
+              </Link>
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={4}>
+              <MDBox mb={1.5}>
+                <ComplexStatisticsCard
+                  color="success"
+                  icon="email"
+                  title={"NO OF PA"}
+                  count={totalnoofcourse}
+                  percentage={{
+                    color: "success",
+                    // amount: "Full Details ->",
+                  }}
+                />
+              </MDBox>
+              <Link to="/livecourseindex">
+                <Button className="ml-3" variant="contained" color="primary">
+                 DEPARTMENT PA
+                </Button>
+              </Link>
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={4}>
+              <MDBox mb={1.5}>
+                <ComplexStatisticsCard
+                  color="success"
+                  icon="email"
+                  title={"NO OF CORDINATOR"}
+                  count={totalnoofcourse}
+                  percentage={{
+                    color: "success",
+                    // amount: "Full Details ->",
+                  }}
+                />
+              </MDBox>
+              <Link to="/livecourseindex">
+                <Button className="ml-3" variant="contained" color="primary">
+                 MONTHLY COORDINATOR
                 </Button>
               </Link>
             </Grid>
           </Grid>
+
+          
+
+
+
+          
         </MDBox>
       </Card>
 
-      <Card style={{ textAlign: "center", padding: "0% 2% 13% 2%" }}>
+      {/* <Card style={{ textAlign: "center", padding: "0% 2% 13% 2%" }}>
         <Grid container spacing={3}>
-          {/* <Grid item xs={12} md={6} lg={6} style={{ textAlign:"-webkit-center" }}>
-            <Link to="/purchaseindex">
-              <Button className="ml-3" variant="contained" color="primary">
-                REVENUE RECEIVED
-              </Button>
-            </Link>
-            <BarChart width={200} height={300} data={finalamount} style={{ marginTop:"20px" }}>
-              <Bar dataKey="value" fill="#358fee" />
-            
-              <XAxis dataKey="name" />
-              <YAxis />
-            </BarChart>
-          </Grid> */}
-
           <Grid item xs={12} md={6} lg={6}>
             <div
               style={{ width: "100%", height: 420 }}
@@ -467,11 +503,11 @@ function Dashboard() {
             </div>
           </Grid>
         </Grid>
-      </Card>
+      </Card> */}
 
       {/* <DashboardNavbar/> */}
 
-      <Card style={{ width: "100%", height: 800 }} className="noofstudents">
+      {/* <Card style={{ width: "100%", height: 800 }} className="noofstudents">
         <Grid container spacing={3} style={{ padding: "0px 20px" }}>
           <Grid item xs={12} md={6} lg={6}>
             <div style={{ width: "100%", height: 350 }}>
@@ -544,7 +580,7 @@ function Dashboard() {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-          </Grid>
+          </Grid> */}
 
           {/* <Grid item xs={12} md={6} lg={6}>
             <div style={{ width: "100%", height: 420 }}>
@@ -580,7 +616,7 @@ function Dashboard() {
 
             </div>
             </Grid> */}
-        </Grid>
+        {/* </Grid> */}
         {/* HIDE */}
 
         {/* <ResponsiveContainer>
@@ -609,7 +645,7 @@ function Dashboard() {
      </PieChart>
     
    </ResponsiveContainer> */}
-      </Card>
+      {/* </Card> */}
     </DashboardLayout>
   );
 }

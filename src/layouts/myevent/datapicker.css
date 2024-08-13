@@ -1,0 +1,78 @@
+
+/* Styling the DatePicker container */
+.react-datepicker-wrapper {
+    display: inline-block;
+  }
+  
+
+/*   
+  /* Styling the input field */
+  .react-datepicker__input-container input {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 150%; /* Adjust width as needed */
+    height: 40px;
+  } */
+  
+  /* Styling the arrow icon
+  .react-datepicker__input-container::after {
+    content: url('path/to/your/arrow-icon.svg');
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+   */
+  /* Styling the calendar popover */
+  .react-datepicker-popper {
+    z-index: 9999; /* Ensure the popover appears above other elements */
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px 60deg, #49a3f1, #1A73E8;
+  }
+  
+  /* Styling the calendar */
+  .react-datepicker {
+    font-family: Arial, sans-serif;
+  }
+  
+
+  /* Styling the navigation buttons */
+  .react-datepicker__navigation {
+    cursor: pointer;
+  }
+  
+  /* Styling the selected date */
+  .react-datepicker__day--selected {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  /* Styling the current month */
+  .react-datepicker__current-month {
+    font-weight: bold;
+  }
+  
+  /* Styling the days of the week */
+  .react-datepicker__day-name {
+    font-weight: bold;
+  }
+  
+  /* Styling individual day cells */
+  .react-datepicker__day {
+    padding: 8px;
+  }
+  
+  /* Styling today's date */
+  .react-datepicker__day--today {
+    font-weight: bold;
+  }
+  
+  /* Styling disabled days */
+  .react-datepicker__day--disabled {
+    color: #ccc;
+  }
+  

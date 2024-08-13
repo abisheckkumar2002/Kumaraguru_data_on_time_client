@@ -1,0 +1,21 @@
+/* CSS */
+.textarea-container {
+    margin-bottom: 10px;
+  }
+  
+  .textarea-input {
+    width: 100%;
+    height: 100px; /* Set the desired height */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical; /* Allow vertical resizing */
+  }
+  
+  /* Optionally, you can style the textarea when it's focused */
+  .textarea-input:focus {
+    outline: none; /* Remove the default focus outline */
+    border-color: #007bff; /* Example of changing border color on focus */
+  }
+  

@@ -17,7 +17,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-
+import { getStaffDetail } from "../../actions/users";
 
 const styles = {
     cardCategoryWhite: {
@@ -43,11 +43,44 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 const staffView = () => {
+  const { id } = useParams();
+  const [formValue, setFormValue] = useState({
+    name: "",
+    mobile: "",
+    type: "",
+    email: "",
+    UserId: "",
+    department: "",
+    addedBy:""
+  });
 
     const [validateError, setValidateError] = useState({});
 
+    const { name, mobile, type, email, UserId, department,addedBy } = formValue;
   const classes = useStyles();
   const history = useNavigate();
+
+
+  const getUserData = async () => {
+    const {userValue,errors} = await getStaffDetail(id);
+    console.log(userValue,"userValueuserValueuserValueuserValueuserValue")
+    let data = {};
+    data["name"] = userValue.name;
+    data["UserId"] = userValue.UserId;
+    data["email"] = userValue.email;
+    data["mobile"] = userValue.mobile;
+    data["type"] = userValue.type;
+    data["department"] = userValue.department;
+    data["addedBy"] = userValue.addedBy;
+
+    setFormValue(data);
+  
+  };
+
+  useEffect(() => {
+    //logout(history)
+    getUserData();
+  }, []);
 
   return (
     <DashboardLayout>
@@ -66,69 +99,86 @@ const staffView = () => {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
                   <Typography noWrap className={classes.address}>
-                    Staff Id
+                    USER ID
                   </Typography>
                 </GridItem>
                 
                 <GridItem xs={12} sm={12} md={4}>
-                  <Box sx={{ typography: "address" }}>MCA1001</Box>
+                  <Box sx={{ typography: "UserId" }}>{UserId}</Box>
                 </GridItem>
               </GridContainer>
 
               <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Typography noWrap className={classes.mail}>
+                  <Typography noWrap className={classes.name}>
                   NAME
                   </Typography>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Box sx={{ typography: "mail" }}>Ranjakarupan</Box>
+                  <Box sx={{ typography: "name" }}>{name}</Box>
                 </GridItem>
               </GridContainer>
 
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                  <Typography noWrap className={classes.mail}>
-                  DEPARTMENT
-                  </Typography>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <Box sx={{ typography: "mail" }}>Master of computer application</Box>
-                </GridItem>
-              </GridContainer>
 
               <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Typography noWrap className={classes.phone}>
+                  <Typography noWrap className={classes.email}>
                   COLLEGE MAILID
                   </Typography>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Box sx={{ typography: "phone" }}>abisheckkumar23.kct@123</Box>
+                  <Box sx={{ typography: "email" }}>{email}</Box>
                 </GridItem>
               </GridContainer>
 
 
               <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Typography noWrap className={classes.phone}>
-                  PHONE NO
+                  <Typography noWrap className={classes.mobile}>
+                  MOBILE NO
                   </Typography>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Box sx={{ typography: "phone" }}>76038984379</Box>
+                  <Box sx={{ typography: "mobile" }}>{mobile}</Box>
                 </GridItem>
               </GridContainer>
+
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                  <Typography noWrap className={classes.type}>
+                 USER TYPE
+                  </Typography>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <Box sx={{ typography: "type" }}>{type}</Box>
+                </GridItem>
+              </GridContainer>
+
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                  <Typography noWrap className={classes.department}>
+               DEPARTMENT
+                  </Typography>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <Box sx={{ typography: "department" }}>{department}</Box>
+                </GridItem>
+              </GridContainer>
+
+             
+
+
+              
 
 
               <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Typography noWrap className={classes.phone}>
-                  DESIGNATION
+                  <Typography noWrap className={classes.addedBy}>
+                  ADDED BY
                   </Typography>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Box sx={{ typography: "phone" }}>Asst proffersor</Box>
+                  <Box sx={{ typography: "addedBy" }}>{addedBy}</Box>
                 </GridItem>
               </GridContainer>
 

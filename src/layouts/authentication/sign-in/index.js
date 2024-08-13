@@ -38,118 +38,167 @@ import MDButton from "components/MDButton";
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 
-import { login } from "../../../actions/users";
 import isEmpty from "../../../lib/isEmpty";
 
 // Images
-import bgImage from "assets/images/kct.png";
+import bgImage from "assets/images/kct22.jpeg";
+import { login } from "actions/users";
+import { toast } from "react-toastify";
 
-const initialFormValue ={
-  email:"", 
-  password:""
-}
+import { useNavigation } from "actions/Navigate";
+
 function SignIn() {
-  const [rememberMe, setRememberMe] = useState(false);
-  const [formValue, setFormValue] = useState(initialFormValue);
+  const history = useNavigate();
 
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
   const [validateError, setValidateError] = useState({});
-  
-  const { email, password } = formValue;
+
+  console.log(validateError, "validateErrorvalidateErrorvalidateError");
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
   };
-
-  const onChange = (e) => {
+  const { navigateTo } = useNavigation();
+  const signOpen = async (e) => {
     e.preventDefault();
-    // console.log(e.target);
-    const { id, value } = e.target;
-    let formData = { ...formValue, ...{ [id]: value } };
-    setFormValue(formData);
-    console.log(formValue);
-    //setValidateError(formData)
+
+    console.log(
+      formValue,
+      "reqDatareqDatareqDatareqDatareqDatareqDatareqDatareqDatareqDatareqData"
+    );
+    let { error, result } = await login(formValue);
+
+    console.log(error, "errorerrorerrorerror");
+    console.log(result, "resultresultresultresult");
+
+    if (isEmpty(error)) {
+      let userType = result.result.userType;
+      var type_name = "";
+
+      if (userType == "Head Of Department") {
+        localStorage.setItem("kct_prefix_route", "hod");
+        type_name = "hod/";
+      } else if (userType == "Principal") {
+        localStorage.setItem("kct_prefix_route", "principal");
+        type_name = "principal/";
+      } else if (userType == "Admin") {
+        localStorage.setItem("kct_prefix_route", "admin");
+        type_name = "admin/";
+      } else if (userType == "Admin") {
+        localStorage.setItem("kct_prefix_route", "admin");
+        type_name = "admin/";
+      } else if (userType == "Faculty") {
+        localStorage.setItem("kct_prefix_route", "faculty");
+        type_name = "faculty/";
+      } else if (userType == "Department PA") {
+        localStorage.setItem("kct_prefix_route", "department_pa");
+        type_name = "department_pa/";
+      } else if (userType == "Montly Executor") {
+        localStorage.setItem("kct_prefix_route", "montly_executor");
+        type_name = "montly_executor/";
+      }
+
+      window.location = type_name + "dashboard";
+
+      setFormValue({
+        email: "",
+        password: "",
+      });
+      // history("dashboard")
+      toast.success("Login Sucessfully");
+
+      // window.location = type_name + "/dashboard";
+    } else {
+      setValidateError(error);
+    }
   };
-  const signOpen = async(e)=>{
-    e.preventDefault();
-    window.location = "/admin/dashboard"
-    // let reqData = {
-    //   email,
-    //   password,
-    // };
-  
-  
-    // console.log(reqData,"reqDatareqDatareqDatareqDatareqDatareqDatareqDatareqDatareqDatareqData")
-    // let { error, result } = await login(reqData);
-    // // console.log(error);
-    // if (isEmpty(error)) {
-    //   setFormValue(initialFormValue);
-    //   // await dispatch(setCurrentUser(result));
-    //   window.location = "/admin/dashboard"
-    // } else {
-    //   setValidateError(error);
-    // }
-
-  }
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
-  const history = useNavigate();
 
   return (
     <BasicLayout image={bgImage}>
       <Card>
-      <form
-              
-              onSubmit={signOpen}
-            >
-        <MDBox
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="info"
-          mx={3}
-          mt={-1}
-          p={2}
-          mb={4}
-          textAlign="center"
-         
-        >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Kumaraguru-Data-On-Time
-          </MDTypography>
-          
-        
-        </MDBox>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
-            <MDBox mb={2}>
-              <MDInput type="email" label="Email" id="email" onChange={onChange} fullWidth />
-              {validateError.email && (
-                      <span style={{color:"red",fontSize:"9px"}}>
-                        {validateError.email}
-                      </span>
-                    )}
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput type="password" label="Password" id="password" onChange={onChange} fullWidth />
-              {validateError.password && (
-                      <span style={{color:"red",fontSize:"9px"}}>
-                        {validateError.password}
-                      </span>
-                    )}
-            </MDBox>
-       
-            <MDBox mt={4} mb={1} style={{ textAlign: 'end', lineSpacingMultiplier:'1.5' }} >
-              <MDButton variant="gradient" color="info" fullWidth onClick={signOpen} type="submit" style={{ PaddingBottom: '12px' }} >
-                sign in
-              </MDButton>
-
-              <a variant="gradient" color="info"  href="/admin/forgotpassword" style={{ textDecoration: 'none' ,fontSize: '14px', textAlign:"end"}} >
-                Forgot password
-              </a>
-              
-            </MDBox>
-
+        <form onSubmit={signOpen}>
+          <MDBox
+            variant="gradient"
+            bgColor="info"
+            borderRadius="lg"
+            coloredShadow="info"
+            mx={3}
+            mt={-1}
+            p={2}
+            mb={4}
+            textAlign="center"
+          >
+            <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
+              KCT LOGIN
+            </MDTypography>
           </MDBox>
-        </MDBox>
+          <MDBox pt={4} pb={3} px={3}>
+            <MDBox component="form" role="form">
+              <MDBox mb={2}>
+                <MDInput
+                  type="email"
+                  label="Email"
+                  onChange={(e) =>
+                    setFormValue({ ...formValue, email: e.target.value })
+                  }
+                  fullWidth
+                />
+                {validateError.email && (
+                  <span style={{ color: "red", fontSize: "15px" }}>
+                    {validateError.email}
+                  </span>
+                )}
+              </MDBox>
+              <MDBox mb={2}>
+                <MDInput
+                  type="password"
+                  label="Password"
+                  onChange={(e) =>
+                    setFormValue({ ...formValue, password: e.target.value })
+                  }
+                  fullWidth
+                />
+                {validateError.password && (
+                  <span style={{ color: "red", fontSize: "15px" }}>
+                    {validateError.password}
+                  </span>
+                )}
+              </MDBox>
+
+              <MDBox
+                mt={4}
+                mb={1}
+                style={{ textAlign: "end", lineSpacingMultiplier: "1.5" }}
+              >
+                <MDButton
+                  variant="gradient"
+                  color="info"
+                  fullWidth
+                  onClick={signOpen}
+                  type="submit"
+                  style={{ PaddingBottom: "12px" }}
+                >
+                  sign in
+                </MDButton>
+
+                <a
+                  variant="gradient"
+                  color="info"
+                  href="/admin/forgotpassword"
+                  style={{
+                    textDecoration: "none",
+                    fontSize: "14px",
+                    textAlign: "end",
+                  }}
+                >
+                  Forgot password
+                </a>
+              </MDBox>
+            </MDBox>
+          </MDBox>
         </form>
       </Card>
     </BasicLayout>
